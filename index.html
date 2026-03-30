@@ -357,11 +357,46 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
 @media(max-width:900px){
   .nlinks{display:none;}
-  .dor-wrap,.familia-ilu-inner,.luma-wrap,.idoso-inner,.planos-grid{grid-template-columns:1fr;}
+  .dor-wrap,.familia-ilu-inner,.luma-wrap,.idoso-inner,.planos-grid{grid-template-columns:1fr;gap:40px;}
   .steps{grid-template-columns:1fr;}.steps::before{display:none;}
   .fv-grid{grid-template-columns:1fr;}
   .pcards{grid-template-columns:1fr;}
   .impacto{grid-template-columns:1fr 1fr;}
+  /* badges com posição negativa causam overflow — esconde em mobile */
+  .idoso-badge,.idoso-badge2{display:none;}
+  /* reduz padding vertical das seções */
+  .dor{padding:72px 5vw;}
+  .familia-ilu{padding:64px 5vw;}
+  .como{padding:72px 5vw;}
+  .features-visual{padding:64px 5vw;}
+  .luma{padding:72px 5vw;}
+  .idoso-section{padding:64px 5vw;}
+  .prova{padding:72px 5vw;}
+  .planos{padding:72px 5vw;}
+  .ctaf{padding:90px 5vw;}
+  /* luma orb menor */
+  .luma-bg1{display:none;}
+  .lorb{width:120px;height:120px;}
+  .lorb-inner{width:96px;height:96px;}
+  /* form CTA empilha */
+  .wform{flex-direction:column;align-items:stretch;}
+  .winput{min-width:unset;width:100%;}
+  /* footer empilha */
+  footer{flex-direction:column;align-items:flex-start;gap:20px;}
+}
+
+@media(max-width:500px){
+  .h-left{padding:40px 5vw 28px;}
+  .h-right{padding:0 5vw 56px;}
+  .h-phones-scene{width:220px;height:360px;}
+  .plan{padding:26px 20px;}
+  .ctaf-h{letter-spacing:-1.5px;}
+  .flinks{gap:14px;flex-wrap:wrap;}
+  .como-header{margin-bottom:52px;}
+  .step{padding:0 12px;}
+  .impacto{grid-template-columns:1fr 1fr;}
+  .fv-grid{gap:12px;}
+  .pcards{gap:12px;}
 }
 </style>
 </head>
@@ -724,7 +759,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
   <div style="text-align:center;max-width:640px;margin:0 auto 60px;" class="reveal">
     <div class="stag" style="color:var(--slate);display:flex;justify-content:center;margin-bottom:12px;">Funcionalidades</div>
     <h2 style="font-size:clamp(28px,3.5vw,48px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:14px;">Tudo que o WhatsApp<br>nunca vai fazer</h2>
-    <p style="font-size:16px;color:var(--label);line-height:1.7;">Cada feature pensada para a realidade do cuidado de idosos no Brasil.</p>
+    <p style="font-size:16px;color:var(--label);line-height:1.7;">Cada funcionalidade pensada para a realidade do cuidado de idosos no Brasil.</p>
   </div>
   <div class="fv-grid">
 
@@ -992,13 +1027,13 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       </div>
       <!-- Badges flutuantes -->
       <div class="idoso-badge">
-        <div style="font-size:9px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Tipografia</div>
-        <div style="font-size:13px;font-weight:600;color:var(--ink);">Mínimo 16px</div>
-        <div style="font-size:10px;color:var(--label);">sempre legível</div>
+        <div style="font-size:9px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Letras</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);">grandes e claras</div>
+        <div style="font-size:10px;color:var(--label);">sempre legíveis</div>
       </div>
       <div class="idoso-badge2">
         <div style="font-size:9px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Botões</div>
-        <div style="font-size:13px;font-weight:600;color:var(--ink);">Min 50px</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);">bem grandes</div>
         <div style="font-size:10px;color:var(--label);">fácil de tocar</div>
       </div>
     </div>
@@ -1099,7 +1134,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="pper pper-p">por mês · família ilimitada · cancele quando quiser</div>
       <div class="pdiv pdiv-p"></div>
       <div class="pfeats">
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Remédios ilimitados + lembretes push</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Remédios ilimitados + lembretes automáticos</span></div>
         <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Botão SOS + alerta GPS</span></div>
         <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Localização em tempo real + zonas</span></div>
         <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p"><strong style="color:var(--mint);">Luma IA</strong> — assistente de voz 24h</span></div>
@@ -1114,10 +1149,10 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
   <div class="plan-compare reveal"><strong>R$2,66 por dia</strong> — menos que um café. Para toda a família. Com paz de espírito 24h.</div>
   <div class="plan-faqs reveal">
     <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Posso cancelar quando quiser? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. Sem multa, sem burocracia. Cancele pelo app ou entre em contato. Você continua com acesso até o fim do período pago.</div></div>
-    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Os dados do meu familiar são seguros? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. Criptografia de ponta a ponta. Seus dados nunca são vendidos. Seguimos a LGPD rigorosamente.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Os dados do meu familiar são seguros? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. Seus dados ficam protegidos e nunca são vendidos. Seguimos todas as leis de privacidade do Brasil.</div></div>
     <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Quantas pessoas podem usar no mesmo plano? <span class="faq-arr">▾</span></div><div class="faq-a">No Família Completo, membros ilimitados — filhos, netos e cuidadores. No gratuito, 1 familiar + 1 idoso.</div></div>
-    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Minha mãe vai conseguir usar? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. A interface do idoso foi projetada com letras grandes, botões amplos e a Luma para quem prefere falar. Se ela usa WhatsApp, vai usar o Acolá.</div></div>
-    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">A Luma funciona offline? <span class="faq-arr">▾</span></div><div class="faq-a">A Luma precisa de conexão para funcionar com IA. Mas o botão SOS funciona mesmo com conexão fraca — é o recurso de segurança máxima do app.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Minha mãe vai conseguir usar? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. O app foi feito especialmente para quem não gosta de tecnologia — letras grandes, botões fáceis e a Luma para quem prefere falar. Se ela usa WhatsApp, vai usar o Acolá.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">A Luma funciona sem internet? <span class="faq-arr">▾</span></div><div class="faq-a">A Luma precisa de internet para conversar. Mas o botão SOS funciona mesmo com sinal fraco — é a função mais importante do app e a mais protegida.</div></div>
   </div>
 </section>
 
