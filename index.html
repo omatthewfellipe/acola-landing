@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acolá — E se ela precisar de você agora?</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A;--forest:#013F22;--slate:#04A56A;--mint:#69FF93;
+  --bg:#F4F3EF;--bg2:#ECEAE4;--white:#FEFEFE;
+  --label:#8A8A8A;--warn:#E8652A;--border:rgba(0,0,0,0.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+/* CURSOR */
+.cur{position:fixed;width:10px;height:10px;background:var(--mint);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference;}
+.cur-r{position:fixed;width:34px;height:34px;border:1.5px solid rgba(1,63,34,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;transition:all .3s;}
+nav.light-nav{background:rgba(244,243,239,.93);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);}
+nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
+.nlogo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.nlogo-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#013F22,#04A56A);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--mint);}
+.nlogo-text{font-size:17px;font-weight:800;letter-spacing:-.3px;}
+.aco-d{color:#fff;}.la-d{color:var(--mint);}
+.aco-l{color:var(--ink);}.la-l{color:var(--slate);}
+.nlinks{display:flex;gap:28px;}
+.nlinks a{font-size:12px;font-weight:500;text-decoration:none;transition:color .2s;}
+.dark-nav .nlinks a{color:rgba(255,255,255,.4);}
+.dark-nav .nlinks a:hover{color:#fff;}
+.light-nav .nlinks a{color:rgba(0,0,0,.4);}
+.light-nav .nlinks a:hover{color:var(--ink);}
+.ncta{font-size:12px;font-weight:700;padding:9px 18px;border-radius:99px;text-decoration:none;transition:all .2s;}
+.dark-nav .ncta{background:var(--mint);color:var(--forest);}
+.light-nav .ncta{background:var(--forest);color:#fff;}
+.ncta:hover{transform:scale(1.04);}
+
+/* HERO — SPLIT ASSIMÉTRICO */
+.hero{min-height:100vh;background:var(--bg);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;position:relative;overflow:hidden;padding-top:64px;}
+.h-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.6;pointer-events:none;z-index:0;}
+/* glow lateral esquerdo — verde mais suave no claro */
+.h-glow1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(1,63,34,.08) 0%,transparent 60%);top:30%;left:-100px;pointer-events:none;animation:gp 6s ease-in-out infinite;z-index:0;}
+.h-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(4,165,106,.06) 0%,transparent 65%);top:60%;left:10%;pointer-events:none;animation:gp 6s ease-in-out infinite .8s;z-index:0;}
+/* linhas diagonais decorativas */
+.h-lines{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+@keyframes gp{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.1);opacity:.55;}}
+
+/* LADO ESQUERDO — copy */
+.h-left{padding:80px 5vw 80px 6vw;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+.h-ey{display:inline-flex;align-items:center;gap:7px;background:rgba(1,63,34,.07);border:.5px solid rgba(1,63,34,.18);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--forest);margin-bottom:32px;width:fit-content;opacity:0;animation:fu .7s ease .1s forwards;}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--slate);animation:blink 1.5s ease-in-out infinite;}
+.h-h1{font-size:clamp(40px,4.5vw,68px);font-weight:900;line-height:1.04;letter-spacing:-2.5px;color:var(--ink);margin-bottom:26px;opacity:0;animation:fu .7s ease .2s forwards;}
+.h-h1 .line-accent{display:block;background:linear-gradient(90deg,var(--forest) 0%,var(--slate) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.h-h1 .line-dim{display:block;color:rgba(0,0,0,.45);}
+/* contador de ansiedade */
+.h-counter{background:rgba(232,101,42,.06);border:.5px solid rgba(232,101,42,.2);border-radius:14px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu .7s ease .28s forwards;}
+.hc-icon{width:38px;height:38px;border-radius:10px;background:var(--warn);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hc-text{font-size:13px;color:rgba(0,0,0,.5);line-height:1.55;}
+.hc-text b{color:rgba(0,0,0,.8);font-weight:600;}
+.hc-time{font-size:22px;font-weight:900;color:var(--warn);letter-spacing:-1px;flex-shrink:0;min-width:60px;text-align:right;}
+.h-sub{font-size:clamp(15px,1.4vw,18px);color:rgba(0,0,0,.45);line-height:1.8;margin-bottom:36px;max-width:440px;opacity:0;animation:fu .7s ease .35s forwards;}
+.h-sub b{color:var(--ink);font-weight:600;}
+.h-acts{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fu .7s ease .42s forwards;}
+.btn-p{background:var(--forest);color:#fff;font-size:14px;font-weight:800;padding:15px 34px;border-radius:13px;text-decoration:none;border:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(1,63,34,.25);}
+.btn-g{background:transparent;border:1.5px solid rgba(0,0,0,.12);color:rgba(0,0,0,.5);font-size:14px;font-weight:600;padding:14px 28px;border-radius:13px;text-decoration:none;transition:all .2s;}
+.btn-g:hover{border-color:rgba(0,0,0,.3);color:var(--ink);}
+/* proof */
+.h-proof{margin-top:48px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;opacity:0;animation:fu .7s ease .5s forwards;}
+.havs{display:flex;}
+.hav{width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;}
+.hav+.hav{margin-left:-8px;}
+.hproof-t{font-size:12px;color:rgba(0,0,0,.35);}
+.hproof-t b{color:var(--ink);}
+
+/* LADO DIREITO — visual do app */
+.h-right{position:relative;display:flex;align-items:center;justify-content:center;padding:80px 5vw 80px 2vw;z-index:2;overflow:visible;}
+/* borda divisória verde */
+.h-right::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:linear-gradient(180deg,transparent,rgba(1,63,34,.12) 30%,rgba(1,63,34,.12) 70%,transparent);}
+.h-phones-scene{position:relative;width:320px;height:520px;}
+/* phone principal */
+.ph-main{position:absolute;top:0;left:50%;transform:translateX(-50%);width:240px;animation:pf 5s ease-in-out infinite;z-index:3;}
+/* phone secundário — ghost por trás */
+.ph-ghost{position:absolute;top:40px;left:0;width:210px;opacity:.2;filter:blur(1px);transform:rotate(-8deg);z-index:1;animation:pf 5s ease-in-out infinite 1s;}
+/* notificações flutuantes — versão light */
+.h-notif1{position:absolute;right:-20px;top:80px;background:var(--white);border:.5px solid rgba(4,165,106,.2);border-radius:14px;padding:10px 14px;width:190px;z-index:5;animation:notifFloat 3s ease-in-out infinite;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.h-notif2{position:absolute;left:-30px;bottom:100px;background:var(--white);border:.5px solid rgba(232,101,42,.2);border-radius:14px;padding:10px 14px;width:170px;z-index:5;animation:notifFloat 3s ease-in-out infinite .8s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.h-notif3{position:absolute;right:-10px;bottom:60px;background:var(--white);border:.5px solid rgba(4,165,106,.2);border-radius:14px;padding:10px 14px;width:160px;z-index:5;animation:notifFloat 3.5s ease-in-out infinite 1.5s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+@keyframes notifFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.notif-title{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.notif-sub{font-size:10px;color:var(--label);}
+.notif-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+@keyframes pf{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-10px);}}
+.ph-frame{background:#0D0D0D;border-radius:42px;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.8),0 0 50px rgba(105,255,147,.06);}
+.ph-screen{border-radius:34px;overflow:hidden;}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:64px;}
+  .h-left{padding:60px 6vw 40px;}
+  .h-right{padding:0 6vw 80px;}.h-right::before{display:none;}
+  .h-phones-scene{width:280px;height:420px;}
+  .ph-ghost,.h-notif1,.h-notif2,.h-notif3{display:none;}
+}
+
+/* TRUST BAR */
+.trust{background:var(--bg);border-top:.5px solid var(--border);border-bottom:.5px solid var(--border);padding:18px 0;overflow:hidden;}
+.trust-inner{display:flex;align-items:center;gap:44px;animation:scroll 22s linear infinite;width:max-content;padding:0 22px;}
+.ti{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:12px;font-weight:600;color:rgba(0,0,0,.3);}
+@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+@keyframes fu{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── DOR ── */
+.dor{background:var(--bg);padding:110px 5vw;position:relative;}
+.dor::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:3px;background:linear-gradient(180deg,transparent,var(--warn) 40%,var(--warn) 60%,transparent);}
+.dor-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:1080px;margin:0 auto;}
+.stag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.dor-h{font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;color:var(--ink);margin-bottom:18px;}
+.dor-h .red{color:var(--warn);}
+.dor-p{font-size:15px;color:rgba(0,0,0,.5);line-height:1.85;margin-bottom:28px;}
+.dor-nums{display:flex;gap:28px;flex-wrap:wrap;}
+.dn-v{font-size:40px;font-weight:900;letter-spacing:-1px;color:var(--ink);}
+.dn-v b{color:var(--warn);}
+.dn-l{font-size:11px;color:var(--label);margin-top:2px;line-height:1.55;}
+.chat-widget{background:var(--white);border-radius:24px;padding:24px;box-shadow:0 4px 32px rgba(0,0,0,.08);border:.5px solid var(--border);}
+.cw-hdr{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:.5px solid var(--border);margin-bottom:14px;}
+.cw-av-img{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.cw-name{font-size:13px;font-weight:600;color:var(--ink);}
+.cw-st{font-size:11px;color:var(--label);}
+.msg{margin-bottom:9px;}
+.msg.out{display:flex;justify-content:flex-end;}
+.bo{background:var(--bg2);color:rgba(0,0,0,.6);font-size:13px;line-height:1.5;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:78%;}
+.bi{background:linear-gradient(135deg,#013F22,#04A56A);color:#fff;font-size:13px;line-height:1.5;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:78%;}
+.mt2{font-size:10px;color:rgba(0,0,0,.2);margin-top:3px;text-align:right;}
+.typing{display:inline-flex;gap:4px;padding:10px 14px;background:var(--bg2);border-radius:99px;}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--label);animation:td 1.2s ease-in-out infinite;}
+.tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
+@keyframes td{0%,80%,100%{transform:scale(.7);opacity:.3;}40%{transform:scale(1);opacity:1;}}
+.unread-bar{background:var(--warn);color:#fff;font-size:12px;font-weight:700;padding:10px 14px;border-radius:11px;margin-top:12px;display:flex;align-items:center;gap:7px;}
+.acola-hint{margin-top:12px;padding:13px;background:#E8FFF0;border-radius:13px;border:.5px solid rgba(4,165,106,.18);}
+.ah-t{font-size:12px;color:var(--forest);font-weight:700;margin-bottom:4px;}
+.ah-l{font-size:11px;color:rgba(1,63,34,.65);line-height:1.8;}
+
+/* ── ILUSTRAÇÃO FAMÍLIA ── */
+.familia-ilu{background:var(--white);padding:90px 5vw;overflow:hidden;}
+.familia-ilu-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.fi-cards{display:flex;flex-direction:column;gap:12px;}
+.fi-person{background:var(--bg);border-radius:20px;padding:18px 20px;display:flex;align-items:center;gap:16px;border:.5px solid var(--border);transition:all .3s;}
+.fi-person:hover{transform:translateX(6px);box-shadow:0 6px 24px rgba(0,0,0,.08);}
+.fi-person-ilu{width:54px;height:54px;border-radius:16px;flex-shrink:0;overflow:hidden;}
+.fi-person-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.fi-person-role{font-size:11px;color:var(--label);}
+.fi-person-status{display:flex;align-items:center;gap:5px;margin-top:6px;}
+.fi-dot{width:6px;height:6px;border-radius:50%;}
+.fi-status-t{font-size:10px;font-weight:600;}
+.fi-content-text{}
+.fi-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:14px;}
+.fi-h{font-size:clamp(26px,3vw,40px);font-weight:900;letter-spacing:-1px;line-height:1.12;color:var(--ink);margin-bottom:16px;}
+.fi-h .m{color:var(--forest);}
+.fi-p{font-size:15px;color:var(--label);line-height:1.8;margin-bottom:24px;}
+.fi-quote{background:var(--bg);border-radius:16px;padding:18px 20px;border-left:3px solid var(--mint);}
+.fi-quote-text{font-size:14px;color:rgba(0,0,0,.65);line-height:1.7;font-style:italic;margin-bottom:8px;}
+.fi-quote-auth{font-size:12px;font-weight:600;color:var(--ink);}
+
+/* ── COMO FUNCIONA ── */
+.como{background:var(--bg);padding:110px 5vw;}
+.como-header{text-align:center;max-width:640px;margin:0 auto 80px;}
+.como-h{font-size:clamp(28px,3.5vw,48px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:14px;}
+.como-sub{font-size:16px;color:var(--label);line-height:1.7;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1080px;margin:0 auto;position:relative;}
+.steps::before{content:'';position:absolute;top:52px;left:calc(16.67% + 16px);right:calc(16.67% + 16px);height:1.5px;background:linear-gradient(90deg,var(--slate),var(--mint));z-index:0;}
+.step{text-align:center;padding:0 24px;position:relative;z-index:1;}
+.snum{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin:0 auto 24px;position:relative;}
+.sn1{background:linear-gradient(135deg,#000,#013F22);color:var(--mint);}
+.sn2{background:linear-gradient(135deg,#013F22,#04A56A);color:#fff;}
+.sn3{background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;}
+.snum::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid;animation:sp 2s ease-in-out infinite;}
+.sn1::after{border-color:rgba(1,63,34,.3);}
+.sn2::after{border-color:rgba(4,165,106,.3);animation-delay:.4s;}
+.sn3::after{border-color:rgba(105,255,147,.3);animation-delay:.8s;}
+@keyframes sp{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.12);opacity:.3;}}
+.step-ilu{width:72px;height:72px;margin:0 auto 18px;}
+.step-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;}
+.step-desc{font-size:14px;color:var(--label);line-height:1.7;}
+
+/* ── ILUSTRAÇÃO FEATURES VISUAIS ── */
+.features-visual{background:var(--white);padding:90px 5vw;}
+.fv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto;}
+.fv-card{border-radius:22px;padding:28px;border:.5px solid var(--border);transition:all .3s;overflow:hidden;position:relative;}
+.fv-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.09);}
+.fv-card.dk{background:linear-gradient(160deg,#000 0%,#013F22 100%);border:none;}
+.fv-card.lt{background:var(--white);}
+.fv-card.off{background:var(--bg);}
+.fv-ilu{width:100%;height:160px;margin-bottom:20px;border-radius:14px;overflow:hidden;position:relative;}
+.fv-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.fv-title{font-size:17px;font-weight:700;letter-spacing:-.2px;margin-bottom:8px;}
+.fv-desc{font-size:13px;line-height:1.7;}
+.mlist{margin-top:14px;display:flex;flex-direction:column;gap:5px;}
+.mrow{background:rgba(255,255,255,.06);border-radius:10px;padding:8px 11px;display:flex;align-items:center;gap:8px;}
+.mrow.lt2{background:var(--white);box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.mic{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mn{font-size:11px;font-weight:500;}.mt3{font-size:9px;}
+.mb{font-size:8px;font-weight:700;padding:2px 6px;border-radius:99px;margin-left:auto;flex-shrink:0;}
+
+/* ── LUMA ── */
+.luma{background:linear-gradient(160deg,#000 0%,#012A16 60%,#013F22 100%);padding:120px 5vw;position:relative;overflow:hidden;}
+.luma-bg1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(105,255,147,.06) 0%,transparent 60%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;}
+.luma-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1080px;margin:0 auto;}
+.lorb-wrap{display:flex;flex-direction:column;align-items:center;gap:24px;}
+.lorb{width:160px;height:160px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;animation:orbF 5s ease-in-out infinite;}
+@keyframes orbF{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.lorb-ring{position:absolute;border-radius:50%;border:1px solid rgba(105,255,147,.18);animation:rp 2.5s ease-in-out infinite;}
+.lorb-ring:nth-child(1){width:100%;height:100%;}
+.lorb-ring:nth-child(2){width:132%;height:132%;animation-delay:.5s;}
+.lorb-ring:nth-child(3){width:170%;height:170%;animation-delay:1s;}
+@keyframes rp{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.1;transform:scale(1.03);}}
+.lorb-inner{width:130px;height:130px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;}
+.lL{font-size:50px;font-weight:800;background:linear-gradient(135deg,var(--mint),#3DFF7A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lwave{display:flex;align-items:center;gap:4px;height:32px;}
+.wb{width:4px;border-radius:3px;background:var(--mint);}
+.wb1{animation:wv 1s ease-in-out infinite;}.wb2{animation:wv 1s ease-in-out infinite .1s;}
+.wb3{animation:wv 1s ease-in-out infinite .2s;}.wb4{animation:wv 1s ease-in-out infinite .3s;}
+.wb5{animation:wv 1s ease-in-out infinite .4s;}.wb6{animation:wv 1s ease-in-out infinite .5s;}
+.wb7{animation:wv 1s ease-in-out infinite .15s;}.wb8{animation:wv 1s ease-in-out infinite .08s;}
+.wb9{animation:wv 1s ease-in-out infinite .22s;}
+@keyframes wv{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
+.luma-l{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.06em;}
+.ltag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:14px;}
+.lh{font-size:clamp(28px,3.5vw,50px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;color:#fff;margin-bottom:14px;}
+.lh .m{color:var(--mint);}
+.ls{font-size:16px;color:rgba(255,255,255,.36);line-height:1.75;margin-bottom:32px;max-width:440px;}
+.lscens{display:flex;flex-direction:column;gap:8px;}
+.lsc{background:rgba(255,255,255,.03);border:.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .2s;}
+.lsc:hover{background:rgba(105,255,147,.04);border-color:rgba(105,255,147,.14);transform:translateX(4px);}
+.lsc.sos{border-color:rgba(232,101,42,.18);}
+.lsc.sos:hover{background:rgba(232,101,42,.04);}
+.lsc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;}
+.lsc-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;}
+.lsc-d{font-size:11px;color:rgba(255,255,255,.3);line-height:1.55;}
+
+/* ── IDOSO ILUSTRAÇÃO ── */
+.idoso-section{background:var(--bg);padding:90px 5vw;}
+.idoso-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.idoso-ilu-wrap{position:relative;}
+.idoso-phone-big{background:#0D0D0D;border-radius:46px;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 80px rgba(0,0,0,.3);width:260px;margin:0 auto;animation:pf 5s ease-in-out infinite;}
+.idoso-phone-screen{border-radius:38px;overflow:hidden;background:#F8F8F8;}
+.idoso-badge{position:absolute;right:-20px;top:40px;background:var(--white);border-radius:16px;padding:12px 16px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:.5px solid var(--border);animation:badgeFloat 3s ease-in-out infinite;}
+@keyframes badgeFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.idoso-badge2{position:absolute;left:-24px;bottom:60px;background:var(--white);border-radius:16px;padding:12px 16px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:.5px solid var(--border);animation:badgeFloat 3s ease-in-out infinite .8s;}
+
+/* ── PROVA SOCIAL ── */
+.prova{background:var(--white);padding:110px 5vw;}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1080px;margin:0 auto;}
+.pc{background:var(--bg);border-radius:20px;padding:26px;border:.5px solid var(--border);transition:all .25s;position:relative;overflow:hidden;}
+.pc:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.09);}
+.pc-ilu{width:52px;height:52px;border-radius:50%;margin-bottom:16px;overflow:hidden;}
+.pc-stars{font-size:13px;margin-bottom:12px;letter-spacing:1px;}
+.pc-q{font-size:14px;color:rgba(0,0,0,.6);line-height:1.75;margin-bottom:20px;font-style:italic;}
+.pc-q strong{color:var(--ink);font-style:normal;}
+.pc-auth{display:flex;align-items:center;gap:10px;}
+.pc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.impacto{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:20px;overflow:hidden;max-width:1080px;margin:40px auto 0;}
+.imp{background:var(--white);padding:36px 24px;text-align:center;}
+.imp-v{font-size:42px;font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin-bottom:6px;}
+.imp-v .ac{color:var(--forest);}
+.imp-l{font-size:13px;color:var(--label);line-height:1.5;}
+
+/* ── PLANOS ── */
+.planos{background:var(--bg);padding:110px 5vw;}
+.planos-header{text-align:center;max-width:600px;margin:0 auto 60px;}
+.planos-h{font-size:clamp(26px,3.2vw,44px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:12px;}
+.planos-s{font-size:16px;color:var(--label);line-height:1.7;}
+.planos-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:840px;margin:0 auto;}
+.plan{border-radius:24px;padding:36px;position:relative;overflow:hidden;transition:all .2s;}
+.plan:hover{transform:translateY(-3px);}
+.plan-free{background:var(--white);border:1.5px solid var(--border);}
+.plan-pro{background:linear-gradient(160deg,#000 0%,#013F22 100%);border:none;}
+.pb{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 12px;font-size:10px;font-weight:700;margin-bottom:22px;}
+.pb-f{background:var(--bg2);color:rgba(0,0,0,.4);}
+.pb-p{background:rgba(105,255,147,.12);border:.5px solid rgba(105,255,147,.22);color:var(--mint);}
+.pb-dot{width:5px;height:5px;border-radius:50%;}
+.pname{font-size:14px;font-weight:700;margin-bottom:6px;}
+.pname-f{color:var(--ink);}.pname-p{color:#fff;}
+.pp{font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:4px;}
+.pp-f{color:var(--ink);}.pp-p{color:#fff;}
+.pp .cif{font-size:18px;font-weight:600;vertical-align:top;margin-top:8px;display:inline-block;}
+.pp-f .cif{color:rgba(0,0,0,.35);}.pp-p .cif{color:rgba(255,255,255,.35);}
+.pp .dec{font-size:22px;font-weight:600;}
+.pp-f .dec{color:rgba(0,0,0,.5);}.pp-p .dec{color:rgba(255,255,255,.5);}
+.pper{font-size:13px;margin-bottom:28px;}
+.pper-f{color:var(--label);}.pper-p{color:rgba(255,255,255,.3);}
+.pdiv{height:1px;margin-bottom:22px;}
+.pdiv-f{background:var(--border);}.pdiv-p{background:rgba(255,255,255,.08);}
+.pfeats{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
+.pf{display:flex;align-items:center;gap:10px;}
+.pchk{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pchk-f{background:#E8FFF0;}.pchk-p{background:rgba(105,255,147,.12);}
+.px{width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pft{font-size:13px;}
+.pft-f{color:rgba(0,0,0,.6);}.pft-p{color:rgba(255,255,255,.65);}
+.pft-off{color:rgba(0,0,0,.28);text-decoration:line-through;}
+.pcta{display:block;text-align:center;font-size:14px;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-family:'Manrope',sans-serif;border:none;cursor:pointer;transition:all .2s;width:100%;}
+.pcta-f{background:var(--bg2);color:rgba(0,0,0,.5);}.pcta-f:hover{color:var(--ink);}
+.pcta-p{background:var(--mint);color:var(--forest);}.pcta-p:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(105,255,147,.25);}
+.pnote{font-size:11px;text-align:center;margin-top:10px;}
+.pnote-f{color:var(--label);}.pnote-p{color:rgba(255,255,255,.22);}
+.plan-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(105,255,147,.07) 0%,transparent 65%);top:-100px;right:-80px;pointer-events:none;}
+.plan-line{position:absolute;top:-1px;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--mint),transparent);}
+.plan-compare{text-align:center;margin:28px auto 0;max-width:840px;font-size:13px;color:var(--label);}
+.plan-compare strong{color:var(--ink);}
+.plan-faqs{max-width:840px;margin:48px auto 0;}
+.faq{padding:18px 0;border-bottom:.5px solid var(--border);cursor:pointer;}
+.faq-q{font-size:14px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:center;}
+.faq-a{font-size:13px;color:var(--label);line-height:1.7;margin-top:10px;display:none;}
+.faq.open .faq-a{display:block;}
+.faq-arr{transition:transform .2s;color:var(--label);}
+.faq.open .faq-arr{transform:rotate(180deg);}
+
+/* CTA */
+.ctaf{background:#000;padding:130px 5vw;text-align:center;position:relative;overflow:hidden;}
+.ctaf-g{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(ellipse,rgba(1,63,34,.3) 0%,transparent 60%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.ctaf-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(105,255,147,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(105,255,147,.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 20%,transparent 100%);}
+.urg{display:inline-flex;align-items:center;gap:8px;background:rgba(232,101,42,.1);border:.5px solid rgba(232,101,42,.2);border-radius:99px;padding:6px 15px;font-size:11px;font-weight:600;color:var(--warn);margin-bottom:28px;}
+.urg-dot{width:6px;height:6px;border-radius:50%;background:var(--warn);animation:blink 1s infinite;}
+.ctaf-h{font-size:clamp(36px,5.5vw,72px);font-weight:900;letter-spacing:-2.5px;line-height:1.04;color:#fff;margin-bottom:18px;position:relative;z-index:2;}
+.ctaf-h .m{color:var(--mint);}
+.ctaf-p{font-size:17px;color:rgba(255,255,255,.35);line-height:1.7;max-width:500px;margin:0 auto 44px;position:relative;z-index:2;}
+.ctaf-p b{color:rgba(255,255,255,.75);}
+.wform{display:flex;gap:10px;max-width:450px;margin:0 auto 14px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;}
+.winput{flex:1;min-width:210px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 18px;font-size:14px;color:#fff;font-family:'Manrope',sans-serif;outline:none;transition:border-color .2s;}
+.winput::placeholder{color:rgba(255,255,255,.2);}
+.winput:focus{border-color:rgba(105,255,147,.35);}
+.wbtn{background:var(--mint);color:var(--forest);font-size:14px;font-weight:800;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s;}
+.wbtn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(105,255,147,.22);}
+.wnote{font-size:12px;color:rgba(255,255,255,.2);position:relative;z-index:2;}
+footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.flogo{font-size:17px;font-weight:800;letter-spacing:-.3px;}
+.flogo .aco{color:#fff;}.flogo .la{color:var(--mint);}
+.flinks{display:flex;gap:22px;}
+.flinks a{font-size:12px;color:rgba(255,255,255,.22);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:rgba(255,255,255,.55);}
+.fcopy{font-size:11px;color:rgba(255,255,255,.14);}
+
+/* UTILS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.revl{opacity:0;transform:translateX(-24px);transition:opacity .65s ease,transform .65s ease;}
+.revl.in{opacity:1;transform:translateX(0);}
+.revr{opacity:0;transform:translateX(24px);transition:opacity .65s ease,transform .65s ease;}
+.revr.in{opacity:1;transform:translateX(0);}
+.tc{text-align:center;}
+
+@media(max-width:900px){
+  .nlinks{display:none;}
+  .dor-wrap,.familia-ilu-inner,.luma-wrap,.idoso-inner,.planos-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}.steps::before{display:none;}
+  .fv-grid{grid-template-columns:1fr;}
+  .pcards{grid-template-columns:1fr;}
+  .impacto{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav id="nav" class="light-nav">
+  <a href="#" class="nlogo">
+    <div class="nlogo-mark">A</div>
+    <span class="nlogo-text"><span id="nAco" class="aco-d">Aco</span><span id="nLa" class="la-d">lá</span></span>
+  </a>
+  <div class="nlinks">
+    <a href="#dor">Problema</a>
+    <a href="#como">Como funciona</a>
+    <a href="#luma">Luma IA</a>
+    <a href="#planos">Preços</a>
+  </div>
+  <a href="#ctaf" class="ncta">Teste grátis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="h-glow1"></div>
+  <div class="h-glow2"></div>
+  <div class="h-grain"></div>
+  <!-- linhas diagonais decorativas SVG -->
+  <div class="h-lines">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1200 800" preserveAspectRatio="none" fill="none">
+      <line x1="600" y1="0" x2="1200" y2="800" stroke="rgba(105,255,147,0.03)" stroke-width="1"/>
+      <line x1="500" y1="0" x2="1200" y2="700" stroke="rgba(105,255,147,0.02)" stroke-width="1"/>
+      <line x1="700" y1="0" x2="1200" y2="600" stroke="rgba(105,255,147,0.02)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- ESQUERDA — copy emocional -->
+  <div class="h-left">
+    <div class="h-ey"><div class="h-dot"></div>App brasileiro · Lançamento em breve</div>
+
+    <h1 class="h-h1">
+      E se ela<br>
+      <span class="line-accent">precisar de você</span>
+      <span class="line-dim">agora?</span>
+    </h1>
+
+    <!-- widget de ansiedade — contador -->
+    <div class="h-counter">
+      <div class="hc-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" fill="none"/><path d="M12 7v5l3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="hc-text">
+        Sua mãe está sem responder há<br>
+        <b>mais de 2 horas.</b> Você não sabe se ela está bem.
+      </div>
+      <div class="hc-time" id="hcTimer">2h17</div>
+    </div>
+
+    <p class="h-sub">
+      O Acolá acaba com essa angústia. <b>Remédios confirmados, localização em tempo real, SOS em segundos</b> e a Luma — assistente de voz com IA que cuida 24h do que o WhatsApp não consegue.
+    </p>
+
+    <div class="h-acts">
+      <a href="#ctaf" class="btn-p">Quero paz de espírito →</a>
+      <a href="#dor" class="btn-g">Ver como funciona</a>
+    </div>
+
+    <div class="h-proof">
+      <div class="havs">
+        <div class="hav" style="background:linear-gradient(135deg,#013F22,#04A56A);">C</div>
+        <div class="hav" style="background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;">A</div>
+        <div class="hav" style="background:linear-gradient(135deg,#000,#013F22);">R</div>
+        <div class="hav" style="background:linear-gradient(135deg,#013F22,#04A56A);">M</div>
+        <div class="hav" style="background:linear-gradient(135deg,#04A56A,#013F22);">S</div>
+      </div>
+      <span class="hproof-t"><b>+200 famílias</b> já na lista de espera</span>
+    </div>
+  </div>
+
+  <!-- DIREITA — visual do app em tamanho real com notificações -->
+  <div class="h-right">
+    <div class="h-phones-scene">
+
+      <!-- Phone ghost por trás (home do idoso) -->
+      <div class="ph-ghost">
+        <div class="ph-frame">
+          <div class="ph-screen" style="background:#F8F8F8;min-height:340px;">
+            <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);padding:12px 16px 44px;">
+              <div style="font-size:9px;color:rgba(255,255,255,.32);margin-bottom:2px;">Quinta, 27 de março</div>
+              <div style="font-size:18px;font-weight:700;color:#fff;">Olá, <span style="color:#69FF93;">Tereza</span></div>
+            </div>
+            <div style="margin:-24px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#013F22,#04A56A,#69FF93);border-radius:13px;padding:12px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Carlos</div></div></div>
+            <div style="padding:10px 12px;"><div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);"><div style="font-size:8px;font-weight:700;color:#04A56A;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Remédio de hoje</div><div style="font-size:20px;font-weight:300;color:#000;letter-spacing:-1px;">14:00</div><div style="font-size:11px;font-weight:600;color:#000;margin-bottom:7px;">Losartana 50mg</div><div style="background:#69FF93;border-radius:8px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#013F22;">Já tomei ✓</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone principal (home do filho) -->
+      <div class="ph-main">
+        <div class="ph-frame">
+          <div class="ph-screen" style="background:#F8F8F8;">
+            <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);">
+              <div style="display:flex;justify-content:space-between;padding:12px 16px 0;"><span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.8);">9:41</span><div style="display:flex;gap:3px;"><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div></div></div>
+              <div style="padding:8px 16px 46px;"><div style="font-size:10px;color:rgba(255,255,255,.32);margin-bottom:2px;">Bom dia, Carlos</div><div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;margin-bottom:6px;">Vovó <span style="color:#69FF93;">Tereza</span></div><div style="display:inline-flex;align-items:center;gap:4px;background:rgba(105,255,147,.1);border:.5px solid rgba(105,255,147,.2);border-radius:99px;padding:3px 9px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:rgba(255,255,255,.6);font-weight:500;">Em casa · agora</span></div></div>
+            </div>
+            <div style="margin:-26px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#013F22 0%,#04A56A 55%,#69FF93 100%);border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 6px 18px rgba(1,63,34,.4);"><div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Tereza</div><div style="font-size:9px;color:rgba(255,255,255,.45);">vídeo ou voz</div></div></div></div>
+            <div style="padding:9px 12px;display:flex;flex-direction:column;gap:7px;"><div style="font-size:8px;font-weight:700;color:#8E8E93;letter-spacing:.08em;text-transform:uppercase;">Remédios hoje</div><div style="background:#fff;border-radius:11px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07);"><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #F8F8F8;"><div style="width:24px;height:24px;border-radius:6px;background:#E8FFF0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#04A56A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Losartana 50mg</div><div style="font-size:8px;color:#8E8E93;">08:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#E8FFF0;color:#006B35;">tomado</span></div><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;"><div style="width:24px;height:24px;border-radius:6px;background:#FFF3EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#E8652A" stroke-width="1.5" fill="none"/><path d="M12 7v5l3 3" stroke="#E8652A" stroke-width="1.5" stroke-linecap="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Metformina</div><div style="font-size:8px;color:#8E8E93;">14:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#FFF3EE;color:#B84000;">pendente</span></div></div>
+            <div style="background:#F8F8F8;border-radius:10px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:8px;font-weight:700;color:#04A56A;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;">Localização</div><div style="font-size:10px;font-weight:600;color:#000;">Em casa</div></div><div style="display:inline-flex;align-items:center;gap:4px;background:#E8FFF0;border-radius:99px;padding:3px 8px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:#013F22;font-weight:600;">ativa</span></div></div>
+            </div>
+            <div style="background:#fff;border-top:.5px solid #F0F0F0;padding:7px 11px 12px;display:flex;justify-content:space-around;"><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#013F22;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:7px;font-weight:600;color:#013F22;">início</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">saúde</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">local</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">perfil</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notificação 1: remédio confirmado -->
+      <div class="h-notif1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <div style="width:22px;height:22px;border-radius:6px;background:#E8FFF0;display:flex;align-items:center;justify-content:center;flex-shrink:0;">💊</div>
+          <div class="notif-title">Losartana tomada ✓</div>
+        </div>
+        <div class="notif-sub">Tereza confirmou às 08:03</div>
+      </div>
+
+      <!-- Notificação 2: SOS -->
+      <div class="h-notif2">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <div class="notif-dot" style="background:var(--warn);animation:blink 1s infinite;"></div>
+          <div class="notif-title" style="color:var(--warn);">SOS acionado</div>
+        </div>
+        <div class="notif-sub">Carlos em rota · 8 min</div>
+      </div>
+
+      <!-- Notificação 3: localização -->
+      <div class="h-notif3">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+          <div class="notif-dot" style="background:#4CD964;"></div>
+          <div class="notif-title">Em casa · agora</div>
+        </div>
+        <div class="notif-sub">Rua das Flores, 42</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Dados seguros · LGPD</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Suporte 24h</div>
+    <div class="ti">⭐⭐⭐⭐⭐ 4.9 de satisfação</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Família ilimitada</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancele quando quiser</div>
+    <div class="ti">🇧🇷 IA em português brasileiro</div>
+    <!-- clone -->
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Dados seguros · LGPD</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Suporte 24h</div>
+    <div class="ti">⭐⭐⭐⭐⭐ 4.9 de satisfação</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Família ilimitada</div>
+    <div class="ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancele quando quiser</div>
+    <div class="ti">🇧🇷 IA em português brasileiro</div>
+  </div>
+</div>
+
+<!-- DOR -->
+<section class="dor" id="dor">
+  <div class="dor-wrap">
+    <div class="revl">
+      <div class="stag" style="color:var(--warn);">A realidade que ninguém quer encarar</div>
+      <h2 class="dor-h">Você liga.<br>Ela não <span class="red">atende.</span><br>E agora?</h2>
+      <p class="dor-p">Você está em São Paulo. Sua mãe está em Belo Horizonte. São 14h numa terça-feira e ela não atende. O coração acelera. Você não sabe se ela caiu, se tomou o remédio, se está bem.</p>
+      <div class="dor-nums">
+        <div><div class="dn-v">32<b>%</b></div><div class="dn-l">sofrem queda todo ano</div></div>
+        <div><div class="dn-v">60<b>%</b></div><div class="dn-l">esquecem remédios<br>sem lembrete</div></div>
+        <div><div class="dn-v">4<b>M</b></div><div class="dn-l">moram sozinhos<br>no Brasil</div></div>
+      </div>
+    </div>
+    <div class="revr">
+      <div class="chat-widget">
+        <div class="cw-hdr">
+          <!-- SVG avatar idosa -->
+          <div class="cw-av-img">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="36" height="36" rx="18" fill="#D4C5B0"/>
+              <ellipse cx="18" cy="14" rx="7" ry="7.5" fill="#C9A882"/>
+              <ellipse cx="18" cy="14" rx="5" ry="5.5" fill="#E8C99A"/>
+              <path d="M8 32c0-5.5 4.5-9 10-9s10 3.5 10 9" fill="#7C5C3E"/>
+              <path d="M11 14c0-4 3-7 7-7s7 3 7 7" stroke="#7C5C3E" stroke-width="1.5" fill="none"/>
+              <ellipse cx="15" cy="15" rx="1" ry="1.2" fill="#5C3D1E"/>
+              <ellipse cx="21" cy="15" rx="1" ry="1.2" fill="#5C3D1E"/>
+              <path d="M15 19 q3 2 6 0" stroke="#C97B6B" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <div><div class="cw-name">Mãe</div><div class="cw-st">visto por último às 11:47</div></div>
+        </div>
+        <div class="msg out"><div><div class="bo">Mãe, tomou o remédio? 💊</div><div class="mt2">14:02</div></div></div>
+        <div class="msg out"><div><div class="bo">Mãe?? 😟</div><div class="mt2">14:23</div></div></div>
+        <div class="msg out"><div><div class="bo">Por favor responde…</div><div class="mt2">14:31</div></div></div>
+        <div class="typing"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>
+        <div class="unread-bar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="white"/></svg>3 mensagens não lidas · 2h atrás</div>
+        <div class="acola-hint">
+          <div class="ah-t">✅ Com o Acolá você saberia agora:</div>
+          <div class="ah-l">Em casa desde 10h · Losartana tomada 08:00<br>Metformina pendente às 14h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAMÍLIA ILUSTRAÇÃO -->
+<section class="familia-ilu" id="familia">
+  <div class="familia-ilu-inner">
+    <div class="revl">
+      <div class="fi-tag">Conexão que importa</div>
+      <h2 class="fi-h">Cuidar é estar <span class="m">presente</span><br>mesmo de longe</h2>
+      <p class="fi-p">O Acolá não substitui o abraço, a ligação, a visita. Ele garante que você sabe que ela está bem — e ela sabe que não está sozinha.</p>
+      <div class="fi-quote">
+        <div class="fi-quote-text">"Minha mãe sempre foi independente e não queria me preocupar. O Acolá me deu paz sem tirar a autonomia dela."</div>
+        <div class="fi-quote-auth">— Ana Luiza, 38 anos · São Paulo</div>
+      </div>
+    </div>
+    <div class="fi-cards revr">
+      <!-- Card: Idosa -->
+      <div class="fi-person">
+        <div class="fi-person-ilu">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="54" height="54" rx="16" fill="#FFF3E8"/>
+            <ellipse cx="27" cy="20" rx="9" ry="9.5" fill="#E8C99A"/>
+            <path d="M14 48c0-7 5.8-12 13-12s13 5 13 12" fill="#7C5C3E"/>
+            <path d="M18 20c0-5 4-9 9-9s9 4 9 9" stroke="#7C5C3E" stroke-width="1.5" fill="none"/>
+            <ellipse cx="23" cy="21" rx="1.2" ry="1.4" fill="#5C3D1E"/>
+            <ellipse cx="31" cy="21" rx="1.2" ry="1.4" fill="#5C3D1E"/>
+            <path d="M23 26 q4 2.5 8 0" stroke="#C97B6B" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M18 18 q-2-4 2-6" stroke="#7C5C3E" stroke-width="1" fill="none"/>
+            <path d="M36 18 q2-4-2-6" stroke="#7C5C3E" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div style="flex:1;">
+          <div class="fi-person-name">Tereza, 74 anos</div>
+          <div class="fi-person-role">São Paulo · mora sozinha</div>
+          <div class="fi-person-status">
+            <div class="fi-dot" style="background:#4CD964;"></div>
+            <div class="fi-status-t" style="color:var(--slate);">Em casa agora · 14:32</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card: Filho -->
+      <div class="fi-person">
+        <div class="fi-person-ilu">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="54" height="54" rx="16" fill="#E8F5FF"/>
+            <ellipse cx="27" cy="19" rx="8.5" ry="9" fill="#FDDBB4"/>
+            <path d="M14 48c0-7 5.8-12 13-12s13 5 13 12" fill="#2C5F8A"/>
+            <path d="M18 19c0-5 3.8-8.5 9-8.5s9 3.5 9 8.5" stroke="#8B5A2B" stroke-width="1.5" fill="none"/>
+            <ellipse cx="23" cy="20" rx="1.2" ry="1.4" fill="#5C3D1E"/>
+            <ellipse cx="31" cy="20" rx="1.2" ry="1.4" fill="#5C3D1E"/>
+            <path d="M23 25 q4 2 8 0" stroke="#C97B6B" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div style="flex:1;">
+          <div class="fi-person-name">Carlos, 41 anos</div>
+          <div class="fi-person-role">Belo Horizonte · filho</div>
+          <div class="fi-person-status">
+            <div class="fi-dot" style="background:var(--slate);"></div>
+            <div class="fi-status-t" style="color:var(--slate);">Tranquilo · mãe está bem ✓</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card: Neta -->
+      <div class="fi-person">
+        <div class="fi-person-ilu">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="54" height="54" rx="16" fill="#FFF0F5"/>
+            <ellipse cx="27" cy="19" rx="8" ry="8.5" fill="#FDDBB4"/>
+            <path d="M14 48c0-7 5.8-12 13-12s13 5 13 12" fill="#C76B9E"/>
+            <path d="M19 17 q-1-6 8-7 q9 1 8 7" stroke="#8B5A2B" stroke-width="1.5" fill="none"/>
+            <path d="M19 16 q1-3 4-2" stroke="#C97B6B" stroke-width="1" fill="none"/>
+            <ellipse cx="23" cy="20" rx="1.1" ry="1.3" fill="#5C3D1E"/>
+            <ellipse cx="31" cy="20" rx="1.1" ry="1.3" fill="#5C3D1E"/>
+            <path d="M23 25 q4 2 8 0" stroke="#C97B6B" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div style="flex:1;">
+          <div class="fi-person-name">Camila, 19 anos</div>
+          <div class="fi-person-role">Recife · neta</div>
+          <div class="fi-person-status">
+            <div class="fi-dot" style="background:#FFB800;"></div>
+            <div class="fi-status-t" style="color:#8B6A00;">Mandou foto às 13h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="como" id="como">
+  <div class="como-header reveal">
+    <div class="stag" style="color:var(--slate);display:flex;justify-content:center;margin-bottom:12px;">Como funciona</div>
+    <h2 class="como-h">Simples para você.<br>Essencial para ela.</h2>
+    <p class="como-sub">Em menos de 5 minutos toda a família está conectada e protegida.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal" style="transition-delay:.05s;">
+      <div class="snum sn1">1</div>
+      <!-- Ilustração: pessoa criando conta -->
+      <div class="step-ilu">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
+          <rect x="18" y="14" width="36" height="44" rx="6" fill="#013F22" opacity=".9"/>
+          <rect x="22" y="20" width="28" height="4" rx="2" fill="white" opacity=".3"/>
+          <rect x="22" y="28" width="20" height="3" rx="1.5" fill="white" opacity=".2"/>
+          <ellipse cx="36" cy="42" rx="9" ry="9" fill="#69FF93"/>
+          <path d="M31 42l4 4 7-7" stroke="#013F22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="step-title">Crie seu perfil</div>
+      <div class="step-desc">Filho ou idoso — cada um tem uma interface feita para suas necessidades. Cadastro em 2 minutos.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:.15s;">
+      <div class="snum sn2">2</div>
+      <!-- Ilustração: família conectada -->
+      <div class="step-ilu">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
+          <circle cx="22" cy="30" r="10" fill="#013F22" opacity=".8"/>
+          <circle cx="50" cy="30" r="10" fill="#04A56A" opacity=".8"/>
+          <circle cx="36" cy="22" r="10" fill="#69FF93" opacity=".9"/>
+          <path d="M22 30 L36 22 L50 30" stroke="white" stroke-width="2" stroke-dasharray="3 2" opacity=".6"/>
+          <ellipse cx="22" cy="29" rx="4" ry="4.5" fill="white" opacity=".4"/>
+          <ellipse cx="50" cy="29" rx="4" ry="4.5" fill="white" opacity=".4"/>
+          <ellipse cx="36" cy="21" rx="4" ry="4.5" fill="#013F22" opacity=".6"/>
+          <circle cx="36" cy="50" r="10" fill="#013F22" opacity=".15"/>
+          <text x="36" y="54" text-anchor="middle" font-size="10" fill="#013F22" font-weight="700" font-family="Manrope">família</text>
+        </svg>
+      </div>
+      <div class="step-title">Convide a família</div>
+      <div class="step-desc">Um código simples conecta todos. Filhos, netos e cuidadores monitorando ao mesmo tempo.</div>
+    </div>
+    <div class="step reveal" style="transition-delay:.25s;">
+      <div class="snum sn3">3</div>
+      <!-- Ilustração: paz de espírito -->
+      <div class="step-ilu">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
+          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" fill="#69FF93" opacity=".7"/>
+          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" stroke="#013F22" stroke-width="1.5" fill="none"/>
+          <path d="M29 36l5 5 10-10" stroke="#013F22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="step-title">Fique tranquilo</div>
+      <div class="step-desc">Remédios, localização, SOS e Luma 24h. Você vive sua vida com paz de espírito real.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES VISUAIS -->
+<section class="features-visual" id="feats">
+  <div style="text-align:center;max-width:640px;margin:0 auto 60px;" class="reveal">
+    <div class="stag" style="color:var(--slate);display:flex;justify-content:center;margin-bottom:12px;">Funcionalidades</div>
+    <h2 style="font-size:clamp(28px,3.5vw,48px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:14px;">Tudo que o WhatsApp<br>nunca vai fazer</h2>
+    <p style="font-size:16px;color:var(--label);line-height:1.7;">Cada feature pensada para a realidade do cuidado de idosos no Brasil.</p>
+  </div>
+  <div class="fv-grid">
+
+    <!-- REMÉDIOS -->
+    <div class="fv-card dk reveal" style="transition-delay:.05s;">
+      <div class="fv-tag" style="color:rgba(105,255,147,.5);">💊 Saúde</div>
+      <!-- Ilustração: calendário de remédios animado -->
+      <div class="fv-ilu" style="background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <!-- Linha do tempo -->
+          <line x1="20" y1="70" x2="280" y2="70" stroke="rgba(105,255,147,.15)" stroke-width="2"/>
+          <!-- Horários -->
+          <g>
+            <circle cx="60" cy="70" r="18" fill="rgba(4,165,106,.3)" stroke="#04A56A" stroke-width="1.5"/>
+            <text x="60" y="66" text-anchor="middle" font-size="9" fill="#69FF93" font-family="Manrope" font-weight="700">08h</text>
+            <path d="M54 73 l5 5 8-8" stroke="#69FF93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="60" y="100" text-anchor="middle" font-size="9" fill="rgba(105,255,147,.5)" font-family="Manrope">tomado</text>
+          </g>
+          <g>
+            <circle cx="120" cy="70" r="18" fill="rgba(4,165,106,.3)" stroke="#04A56A" stroke-width="1.5"/>
+            <text x="120" y="66" text-anchor="middle" font-size="9" fill="#69FF93" font-family="Manrope" font-weight="700">10h</text>
+            <path d="M114 73 l5 5 8-8" stroke="#69FF93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="120" y="100" text-anchor="middle" font-size="9" fill="rgba(105,255,147,.5)" font-family="Manrope">tomado</text>
+          </g>
+          <g>
+            <circle cx="180" cy="70" r="20" fill="rgba(232,101,42,.2)" stroke="#E8652A" stroke-width="2">
+              <animate attributeName="r" values="20;23;20" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="180" y="66" text-anchor="middle" font-size="9" fill="#E8652A" font-family="Manrope" font-weight="700">14h</text>
+            <text x="180" y="76" text-anchor="middle" font-size="11" fill="#E8652A">!</text>
+            <text x="180" y="100" text-anchor="middle" font-size="9" fill="#E8652A" font-family="Manrope">pendente</text>
+          </g>
+          <g opacity=".3">
+            <circle cx="240" cy="70" r="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+            <text x="240" y="66" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.4)" font-family="Manrope" font-weight="700">20h</text>
+            <text x="240" y="100" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="Manrope">próximo</text>
+          </g>
+          <!-- Notificação push -->
+          <rect x="170" y="10" width="110" height="36" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(105,255,147,.2)" stroke-width="1"/>
+          <text x="185" y="25" font-size="8" fill="rgba(255,255,255,.6)" font-family="Manrope" font-weight="600">🔔 Lembrete: Metformina</text>
+          <text x="185" y="37" font-size="7" fill="rgba(255,255,255,.35)" font-family="Manrope">Carlos foi notificado ✓</text>
+        </svg>
+      </div>
+      <div class="fv-title" style="color:#fff;">Remédios no horário certo</div>
+      <div class="fv-desc" style="color:rgba(255,255,255,.38);">Cadastre uma vez. Confirmação por voz ou toque. Notificação automática para toda a família.</div>
+    </div>
+
+    <!-- LOCALIZAÇÃO -->
+    <div class="fv-card lt reveal" style="transition-delay:.15s;">
+      <div class="fv-tag" style="color:var(--slate);">📍 Localização</div>
+      <div class="fv-ilu" style="background:var(--bg);position:relative;overflow:hidden;">
+        <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <!-- Grade do mapa -->
+          <defs>
+            <pattern id="mapgrid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(4,165,106,.08)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="300" height="140" fill="url(#mapgrid)"/>
+          <!-- Ruas simuladas -->
+          <rect x="0" y="60" width="300" height="8" rx="2" fill="rgba(4,165,106,.06)"/>
+          <rect x="120" y="0" width="8" height="140" rx="2" fill="rgba(4,165,106,.06)"/>
+          <rect x="0" y="100" width="300" height="6" rx="2" fill="rgba(4,165,106,.04)"/>
+          <rect x="60" y="0" width="6" height="140" rx="2" fill="rgba(4,165,106,.04)"/>
+          <rect x="200" y="0" width="6" height="140" rx="2" fill="rgba(4,165,106,.04)"/>
+          <!-- Zona segura -->
+          <circle cx="150" cy="70" r="38" fill="rgba(4,165,106,.08)" stroke="rgba(4,165,106,.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <!-- Pin da Tereza -->
+          <circle cx="150" cy="70" r="16" fill="#69FF93">
+            <animate attributeName="r" values="16;20;16" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="70" r="11" fill="#013F22"/>
+          <text x="150" y="74" text-anchor="middle" font-size="10" fill="#69FF93" font-weight="800" font-family="Manrope">T</text>
+          <!-- Label -->
+          <rect x="160" y="48" width="88" height="28" rx="8" fill="white" filter="url(#shadow)"/>
+          <text x="172" y="60" font-size="9" fill="#013F22" font-weight="700" font-family="Manrope">Em casa · agora</text>
+          <circle cx="168" cy="58" r="3" fill="#4CD964"/>
+          <text x="172" y="70" font-size="8" fill="#8E8E93" font-family="Manrope">Rua das Flores, 42</text>
+          <!-- Zona segura label -->
+          <text x="88" y="30" font-size="8" fill="rgba(4,165,106,.6)" font-family="Manrope" font-weight="600">zona segura ✓</text>
+        </svg>
+      </div>
+      <div class="fv-title">Ela está bem. Você sabe.</div>
+      <div class="fv-desc" style="color:var(--label);">Localização em tempo real, zonas seguras configuráveis. Alerta quando sair de casa.</div>
+    </div>
+
+    <!-- SOS -->
+    <div class="fv-card off reveal" style="transition-delay:.25s;">
+      <div class="fv-tag" style="color:var(--warn);">🚨 Emergência</div>
+      <div class="fv-ilu" style="background:var(--bg2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <!-- Botão SOS central -->
+          <circle cx="150" cy="70" r="42" fill="rgba(232,101,42,.12)" stroke="rgba(232,101,42,.3)" stroke-width="2">
+            <animate attributeName="r" values="42;50;42" dur="1.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="70" r="34" fill="rgba(232,101,42,.2)" stroke="rgba(232,101,42,.5)" stroke-width="1.5"/>
+          <circle cx="150" cy="70" r="26" fill="#E8652A"/>
+          <text x="150" y="75" text-anchor="middle" font-size="13" fill="white" font-weight="900" font-family="Manrope">SOS</text>
+          <!-- Ondas de alerta -->
+          <circle cx="150" cy="70" r="58" fill="none" stroke="rgba(232,101,42,.15)" stroke-width="1.5">
+            <animate attributeName="r" values="34;70;34" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Notificações enviadas -->
+          <rect x="10" y="10" width="90" height="30" rx="8" fill="white" opacity=".9"/>
+          <text x="20" y="22" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📱 Carlos notificado</text>
+          <text x="20" y="33" font-size="7" fill="#8E8E93" font-family="Manrope">há 3 segundos</text>
+          <rect x="200" y="10" width="88" height="30" rx="8" fill="white" opacity=".9"/>
+          <text x="210" y="22" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📍 GPS enviado</text>
+          <text x="210" y="33" font-size="7" fill="#8E8E93" font-family="Manrope">Rua das Flores, 42</text>
+          <rect x="200" y="100" width="88" height="30" rx="8" fill="white" opacity=".9"/>
+          <text x="210" y="112" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📱 Ana notificada</text>
+          <text x="210" y="123" font-size="7" fill="#8E8E93" font-family="Manrope">a caminho · 8 min</text>
+        </svg>
+      </div>
+      <div class="fv-title">SOS em 10 segundos</div>
+      <div class="fv-desc" style="color:var(--label);">Toque ou voz. Família notificada com GPS em menos de 10 segundos. Nunca sozinha.</div>
+    </div>
+
+    <!-- LUMA PREVIEW no lugar do chat -->
+    <div class="fv-card dk reveal" style="transition-delay:.35s;">
+      <div class="fv-tag" style="color:rgba(105,255,147,.5);">🎙️ Luma IA</div>
+      <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;"><div style="width:42px;height:42px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#69FF93;font-family:Manrope;">L</div></div>
+        <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+          <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
+          <div style="background:rgba(105,255,147,.08);border:.5px solid rgba(105,255,147,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+        </div>
+      </div>
+      <div class="fv-title" style="color:#fff;">Luma — Assistente de voz IA</div>
+      <div class="fv-desc" style="color:rgba(255,255,255,.38);">Confirma remédios, responde dúvidas de saúde e aciona SOS por voz. O diferencial que o WhatsApp nunca vai ter.</div>
+    </div>
+
+    <!-- LUMA PREVIEW -->
+    <div class="fv-card dk reveal" style="transition-delay:.45s;grid-column:span 1;">
+      <div class="fv-tag" style="color:rgba(105,255,147,.5);">🎙️ Luma IA</div>
+      <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+        <!-- Orb Luma pequeno -->
+        <div style="width:56px;height:56px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#69FF93;font-family:Manrope;">L</div>
+        </div>
+        <!-- Conversa de voz -->
+        <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+          <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
+          <div style="background:rgba(105,255,147,.08);border:.5px solid rgba(105,255,147,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+        </div>
+      </div>
+      <div class="fv-title" style="color:#fff;">Luma — Assistente de voz</div>
+      <div class="fv-desc" style="color:rgba(255,255,255,.38);">Fala em português claro. Confirma remédios, responde dúvidas e aciona SOS. O diferencial que nenhum app tem.</div>
+    </div>
+
+    <!-- RELATÓRIO -->
+    <div class="fv-card off reveal" style="transition-delay:.55s;">
+      <div class="fv-tag" style="color:var(--slate);">📊 Histórico</div>
+      <div class="fv-ilu" style="background:var(--white);padding:14px;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+        <!-- Mini gráfico de adesão -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink);">Adesão esta semana</div>
+          <div style="font-size:16px;font-weight:900;color:var(--forest);">87%</div>
+        </div>
+        <div style="display:flex;gap:4px;align-items:flex-end;height:48px;">
+          <div style="flex:1;background:var(--slate);border-radius:3px;height:80%;opacity:.8;"></div>
+          <div style="flex:1;background:var(--slate);border-radius:3px;height:100%;"></div>
+          <div style="flex:1;background:#E5E5EA;border-radius:3px;height:40%;"></div>
+          <div style="flex:1;background:var(--slate);border-radius:3px;height:95%;"></div>
+          <div style="flex:1;background:#69FF93;border-radius:3px;height:70%;opacity:.7;"></div>
+          <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
+          <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
+        </div>
+        <div style="display:flex;gap:4px;">
+          <div style="flex:1;font-size:8px;color:var(--label);text-align:center;">Seg</div>
+          <div style="flex:1;font-size:8px;color:var(--label);text-align:center;">Ter</div>
+          <div style="flex:1;font-size:8px;color:var(--warn);text-align:center;">Qua</div>
+          <div style="flex:1;font-size:8px;color:var(--label);text-align:center;">Qui</div>
+          <div style="flex:1;font-size:8px;color:var(--forest);font-weight:700;text-align:center;">Hj</div>
+          <div style="flex:1;font-size:8px;color:var(--label);opacity:.3;text-align:center;">Sex</div>
+          <div style="flex:1;font-size:8px;color:var(--label);opacity:.3;text-align:center;">Sáb</div>
+        </div>
+        <div style="background:#E8FFF0;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="font-size:16px;">❤️</div>
+          <div><div style="font-size:10px;font-weight:600;color:var(--forest);">Pressão: 120/80 — normal</div><div style="font-size:9px;color:var(--label);">ontem, 18:30</div></div>
+        </div>
+      </div>
+      <div class="fv-title">Relatório semanal</div>
+      <div class="fv-desc" style="color:var(--label);">Adesão, pressão arterial e bem-estar. Consolidado para você e para o médico.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LUMA SECTION -->
+<section class="luma" id="luma">
+  <div class="luma-bg1"></div>
+  <div class="luma-wrap">
+    <div class="lorb-wrap revl">
+      <div class="lorb">
+        <div class="lorb-ring"></div><div class="lorb-ring"></div><div class="lorb-ring"></div>
+        <div class="lorb-inner"><div class="lL">L</div></div>
+      </div>
+      <div class="lwave"><div class="wb wb1"></div><div class="wb wb2"></div><div class="wb wb3"></div><div class="wb wb4"></div><div class="wb wb5"></div><div class="wb wb6"></div><div class="wb wb7"></div><div class="wb wb8"></div><div class="wb wb9"></div></div>
+      <div class="luma-l">Luma está ouvindo...</div>
+    </div>
+    <div class="revr">
+      <div class="ltag">Luma — Inteligência Artificial</div>
+      <h2 class="lh">A cuidadora que<br>nunca <span class="m">vai embora</span></h2>
+      <p class="ls">Fala português claro, entende saúde e faz o que nenhum app de cuidado fazia antes para idosos brasileiros.</p>
+      <div class="lscens">
+        <div class="lsc"><div class="lsc-ic" style="background:rgba(105,255,147,.1);">💊</div><div><div class="lsc-t">"Luma, tomei meu remédio"</div><div class="lsc-d">Confirma no histórico e notifica a família. Sem digitar nada.</div></div></div>
+        <div class="lsc"><div class="lsc-ic" style="background:rgba(105,255,147,.1);">❓</div><div><div class="lsc-t">"Posso tomar com suco de laranja?"</div><div class="lsc-d">Responde com contexto dos remédios. Nunca dá diagnóstico médico.</div></div></div>
+        <div class="lsc sos"><div class="lsc-ic" style="background:rgba(232,101,42,.12);">🚨</div><div><div class="lsc-t" style="color:var(--warn);">"Luma, preciso de ajuda"</div><div class="lsc-d">SOS direto — família notificada + GPS em segundos.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDOSO SECTION com phone mockup grande -->
+<section class="idoso-section">
+  <div class="idoso-inner">
+    <div class="revl" style="text-align:center;">
+      <div class="idoso-phone-big" style="animation:pf 5s ease-in-out infinite;">
+        <div class="idoso-phone-screen">
+          <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);">
+            <div style="display:flex;justify-content:space-between;padding:12px 16px 0;"><span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.8);">9:41</span><div style="display:flex;gap:3px;"><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div></div></div>
+            <div style="padding:10px 18px 50px;">
+              <div style="font-size:11px;color:rgba(255,255,255,.32);margin-bottom:3px;">Quinta, 27 de março</div>
+              <div style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-.3px;">Olá, <span style="color:#69FF93;">Tereza</span></div>
+            </div>
+          </div>
+          <div style="margin:-30px 14px 0;position:relative;z-index:2;">
+            <div style="background:linear-gradient(135deg,#013F22 0%,#04A56A 55%,#69FF93 100%);border-radius:17px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 24px rgba(1,63,34,.4);">
+              <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div>
+              <div><div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Ligar para Carlos</div><div style="font-size:11px;color:rgba(255,255,255,.5);">seu filho</div></div>
+            </div>
+          </div>
+          <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
+            <!-- Botão Luma -->
+            <div style="background:#fff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:13px;border:2px solid #013F22;box-shadow:0 2px 12px rgba(0,0,0,.07);">
+              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#013F22,#04A56A);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;"><span style="font-size:16px;font-weight:800;color:#69FF93;font-family:Manrope;">L</span><div style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#69FF93;border:2px solid #fff;animation:blink 2s infinite;"></div></div>
+              <div><div style="font-size:14px;font-weight:700;color:#013F22;">Falar com Luma</div><div style="font-size:10px;color:#8E8E93;">remédios · dúvidas · ajuda</div></div>
+            </div>
+            <!-- Remédio -->
+            <div style="background:#F8F8F8;border-radius:15px;padding:13px 14px;">
+              <div style="font-size:9px;font-weight:700;color:#04A56A;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Remédio de hoje</div>
+              <div style="font-size:26px;font-weight:300;color:#000;letter-spacing:-1px;margin-bottom:2px;">14:00</div>
+              <div style="font-size:13px;font-weight:600;color:#000;margin-bottom:8px;">Losartana 50mg</div>
+              <div style="background:#69FF93;border-radius:10px;padding:9px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#013F22;">Já tomei ✓</div></div>
+            </div>
+            <!-- Emergência -->
+            <div style="background:#FFF3EE;border-radius:15px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(232,101,42,.15);">
+              <div><div style="font-size:12px;font-weight:700;color:#B84000;margin-bottom:2px;">Preciso de ajuda</div><div style="font-size:10px;color:#8E8E93;">ou diga "Luma, preciso de ajuda"</div></div>
+              <div style="width:36px;height:36px;border-radius:10px;background:#E8652A;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="white"/></svg></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-top:.5px solid #F0F0F0;padding:8px 13px 13px;display:flex;justify-content:space-around;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#013F22;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:8px;font-weight:600;color:#013F22;">início</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">saúde</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#8E8E93" stroke-width="2" fill="none"/><circle cx="9" cy="7" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">família</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">perfil</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Badges flutuantes -->
+      <div class="idoso-badge">
+        <div style="font-size:9px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Tipografia</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);">Mínimo 16px</div>
+        <div style="font-size:10px;color:var(--label);">sempre legível</div>
+      </div>
+      <div class="idoso-badge2">
+        <div style="font-size:9px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Botões</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);">Min 50px</div>
+        <div style="font-size:10px;color:var(--label);">fácil de tocar</div>
+      </div>
+    </div>
+    <div class="revr">
+      <div class="fi-tag">Interface do idoso</div>
+      <h2 class="fi-h" style="font-size:clamp(26px,3vw,40px);font-weight:900;letter-spacing:-1px;line-height:1.12;color:var(--ink);margin-bottom:16px;">Feito para quem <span class="fi-h .m" style="color:var(--forest);">não gosta<br>de tecnologia</span></h2>
+      <p class="fi-p" style="font-size:15px;color:var(--label);line-height:1.8;margin-bottom:24px;">Letras grandes, botões amplos, máximo 4 elementos por tela. A Luma para quem prefere falar a digitar. Sua mãe vai usar — mesmo sem querer.</p>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <div><div style="font-size:32px;font-weight:900;letter-spacing:-1px;color:var(--ink);">16<span style="color:var(--slate);">px</span></div><div style="font-size:11px;color:var(--label);margin-top:2px;">tamanho mínimo<br>de texto</div></div>
+        <div><div style="font-size:32px;font-weight:900;letter-spacing:-1px;color:var(--ink);">50<span style="color:var(--slate);">px</span></div><div style="font-size:11px;color:var(--label);margin-top:2px;">altura mínima<br>dos botões</div></div>
+        <div><div style="font-size:32px;font-weight:900;letter-spacing:-1px;color:var(--ink);">4<span style="color:var(--slate);">×</span></div><div style="font-size:11px;color:var(--label);margin-top:2px;">menos elementos<br>por tela</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section class="prova" id="depoimentos">
+  <div class="reveal tc" style="max-width:640px;margin:0 auto 56px;">
+    <div class="stag" style="color:var(--slate);display:flex;justify-content:center;margin-bottom:12px;">Depoimentos</div>
+    <h2 style="font-size:clamp(26px,3.2vw,44px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:12px;">Famílias que não<br>vivem mais com esse peso</h2>
+    <p style="font-size:16px;color:var(--label);">Acesso antecipado com 7 dias grátis.</p>
+  </div>
+  <div class="pcards">
+    <div class="pc reveal" style="transition-delay:.05s;">
+      <!-- Avatar ilustrado filho -->
+      <div class="pc-ilu">
+        <svg viewBox="0 0 52 52" fill="none"><rect width="52" height="52" rx="26" fill="#EBF4FF"/><ellipse cx="26" cy="18" rx="8" ry="8.5" fill="#FDDBB4"/><path d="M13 46c0-7 5.8-12 13-12s13 5 13 12" fill="#2C5F8A"/><path d="M18 18c0-5 3.5-8 8-8s8 3 8 8" stroke="#8B5A2B" stroke-width="1.5" fill="none"/><ellipse cx="22" cy="19" rx="1.1" ry="1.3" fill="#5C3D1E"/><ellipse cx="30" cy="19" rx="1.1" ry="1.3" fill="#5C3D1E"/><path d="M22 24 q4 2 8 0" stroke="#C97B6B" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <div class="pc-stars">⭐⭐⭐⭐⭐</div>
+      <div class="pc-q">"Minha mãe tem 78 anos e mora sozinha em BH. O Acolá me deu a tranquilidade que eu precisava — <strong>sei quando ela tomou cada remédio</strong>, sem precisar ligar toda hora."</div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#013F22,#04A56A);">CA</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Carlos Andrade</div><div style="font-size:11px;color:var(--label);">Filho · São Paulo</div></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.15s;">
+      <!-- Avatar filha -->
+      <div class="pc-ilu">
+        <svg viewBox="0 0 52 52" fill="none"><rect width="52" height="52" rx="26" fill="#FFF0F5"/><ellipse cx="26" cy="18" rx="8" ry="8.5" fill="#FDDBB4"/><path d="M13 46c0-7 5.8-12 13-12s13 5 13 12" fill="#C76B9E"/><path d="M18 16 q-1-6 8-7 q9 1 8 7" stroke="#8B5A2B" stroke-width="1.5" fill="none"/><ellipse cx="22" cy="19" rx="1.1" ry="1.3" fill="#5C3D1E"/><ellipse cx="30" cy="19" rx="1.1" ry="1.3" fill="#5C3D1E"/><path d="M22 24 q4 2 8 0" stroke="#C97B6B" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <div class="pc-stars">⭐⭐⭐⭐⭐</div>
+      <div class="pc-q">"A Luma foi o que me convenceu. Minha mãe não gosta de digitar, mas fala com ela todo dia. <strong>É como ter uma cuidadora disponível 24h.</strong>"</div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;">AM</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Ana Menezes</div><div style="font-size:11px;color:var(--label);">Filha · Brasília</div></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.25s;">
+      <!-- Avatar filho 2 -->
+      <div class="pc-ilu">
+        <svg viewBox="0 0 52 52" fill="none"><rect width="52" height="52" rx="26" fill="#F0FFF4"/><ellipse cx="26" cy="18" rx="8" ry="8.5" fill="#C8A07A"/><path d="M13 46c0-7 5.8-12 13-12s13 5 13 12" fill="#1A4A2E"/><path d="M18 18c0-5 3.5-8 8-8s8 3 8 8" stroke="#5C3D1E" stroke-width="1.5" fill="none"/><ellipse cx="22" cy="19" rx="1.1" ry="1.3" fill="#3D2510"/><ellipse cx="30" cy="19" rx="1.1" ry="1.3" fill="#3D2510"/><path d="M22 24 q4 2 8 0" stroke="#A0624A" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <div class="pc-stars">⭐⭐⭐⭐⭐</div>
+      <div class="pc-q">"Meu pai acionou o SOS. <strong>Em menos de 3 minutos eu sabia exatamente onde ele estava.</strong> Esse app é essencial pra quem tem pais morando longe."</div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#000,#013F22);">RP</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Roberto Pires</div><div style="font-size:11px;color:var(--label);">Filho · Curitiba</div></div></div>
+    </div>
+  </div>
+  <div class="impacto reveal">
+    <div class="imp"><div class="imp-v">60<span class="ac">%</span></div><div class="imp-l">esquecem remédios<br>sem lembrete</div></div>
+    <div class="imp"><div class="imp-v">4<span class="ac">M</span></div><div class="imp-l">idosos moram<br>sozinhos no Brasil</div></div>
+    <div class="imp"><div class="imp-v">&lt;3<span class="ac">min</span></div><div class="imp-l">resposta ao SOS<br>do Acolá</div></div>
+    <div class="imp"><div class="imp-v">200<span class="ac">+</span></div><div class="imp-l">famílias na<br>lista de espera</div></div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="planos" id="planos">
+  <div class="planos-header reveal">
+    <div class="stag" style="color:var(--slate);display:flex;justify-content:center;margin-bottom:12px;">Planos</div>
+    <h2 class="planos-h">Simples, sem surpresas</h2>
+    <p class="planos-s">Escolha o que faz sentido agora. Migre quando quiser.</p>
+  </div>
+  <div class="planos-grid">
+    <div class="plan plan-free reveal" style="transition-delay:.05s;">
+      <div class="pb pb-f"><div class="pb-dot" style="background:rgba(0,0,0,.3);"></div>Básico · Grátis</div>
+      <div class="pname pname-f">Para começar</div>
+      <div class="pp pp-f"><span class="cif">R$</span>0<span class="dec">,00</span></div>
+      <div class="pper pper-f">para sempre · 1 idoso · 1 familiar</div>
+      <div class="pdiv pdiv-f"></div>
+      <div class="pfeats">
+        <div class="pf"><div class="pchk pchk-f"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#04A56A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-f">Botão SOS</span></div>
+        <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Localização em tempo real</span></div>
+        <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Luma IA</span></div>
+        <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Membros ilimitados</span></div>
+      </div>
+      <button class="pcta pcta-f">Começar grátis</button>
+      <div class="pnote pnote-f">Sem cartão de crédito</div>
+    </div>
+    <div class="plan plan-pro reveal" style="transition-delay:.15s;">
+      <div class="plan-glow"></div><div class="plan-line"></div>
+      <div class="pb pb-p"><div class="pb-dot" style="background:var(--mint);animation:blink 1.5s infinite;"></div>Família Completo · Mais popular</div>
+      <div class="pname pname-p">Para a família toda</div>
+      <div class="pp pp-p"><span class="cif">R$</span>79<span class="dec">,90</span></div>
+      <div class="pper pper-p">por mês · família ilimitada · cancele quando quiser</div>
+      <div class="pdiv pdiv-p"></div>
+      <div class="pfeats">
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Remédios ilimitados + lembretes push</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Botão SOS + alerta GPS</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Localização em tempo real + zonas</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p"><strong style="color:var(--mint);">Luma IA</strong> — assistente de voz 24h</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Relatório semanal de saúde</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Membros ilimitados na família</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Suporte prioritário 24h</span></div>
+      </div>
+      <a href="#ctaf" class="pcta pcta-p">Começar 7 dias grátis →</a>
+      <div class="pnote pnote-p">Sem cartão nos primeiros 7 dias</div>
+    </div>
+  </div>
+  <div class="plan-compare reveal"><strong>R$2,66 por dia</strong> — menos que um café. Para toda a família. Com paz de espírito 24h.</div>
+  <div class="plan-faqs reveal">
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Posso cancelar quando quiser? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. Sem multa, sem burocracia. Cancele pelo app ou entre em contato. Você continua com acesso até o fim do período pago.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Os dados do meu familiar são seguros? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. Criptografia de ponta a ponta. Seus dados nunca são vendidos. Seguimos a LGPD rigorosamente.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Quantas pessoas podem usar no mesmo plano? <span class="faq-arr">▾</span></div><div class="faq-a">No Família Completo, membros ilimitados — filhos, netos e cuidadores. No gratuito, 1 familiar + 1 idoso.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">Minha mãe vai conseguir usar? <span class="faq-arr">▾</span></div><div class="faq-a">Sim. A interface do idoso foi projetada com letras grandes, botões amplos e a Luma para quem prefere falar. Se ela usa WhatsApp, vai usar o Acolá.</div></div>
+    <div class="faq" onclick="toggleFaq(this)"><div class="faq-q">A Luma funciona offline? <span class="faq-arr">▾</span></div><div class="faq-a">A Luma precisa de conexão para funcionar com IA. Mas o botão SOS funciona mesmo com conexão fraca — é o recurso de segurança máxima do app.</div></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="ctaf" id="ctaf">
+  <div class="ctaf-g"></div><div class="ctaf-grid"></div>
+  <div class="urg reveal"><div class="urg-dot"></div>Vagas limitadas · acesso antecipado</div>
+  <h2 class="ctaf-h reveal">Sua mãe merece<br>mais que um <span class="m">áudio<br>não lido</span></h2>
+  <p class="ctaf-p reveal">Entre na lista agora e garanta <b>7 dias grátis</b> — exclusivo para quem se cadastrar hoje.</p>
+  <div class="reveal">
+    <div class="wform">
+      <input type="email" class="winput" id="emailInput" placeholder="seu@email.com">
+      <button class="wbtn" id="waitlistBtn">Garantir acesso →</button>
+    </div>
+    <div class="wnote" id="wnote">Sem cartão · Sem spam · Cancele quando quiser</div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo"><span class="aco">Aco</span><span class="la">lá</span></div>
+  <div class="flinks">
+    <a href="#">Privacidade</a><a href="#">Termos</a><a href="#">Contato</a><a href="#">Instagram</a><a href="#">Blog</a>
+  </div>
+  <div class="fcopy">© 2026 Acolá · Feito com ❤️ no Brasil</div>
+</footer>
+
+<script>
+// Contador de ansiedade no hero — sobe lentamente
+let hMin=17,hHour=2;
+function updateTimer(){
+  hMin++;
+  if(hMin>=60){hMin=0;hHour++;}
+  const el=document.getElementById('hcTimer');
+  if(el)el.textContent=hHour+'h'+(hMin<10?'0':'')+hMin;
+}
+setInterval(updateTimer,4000);
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.fv-card,.lsc,.pc,.faq,.fi-person').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';});
+});
+
+const darkSecs=['luma','ctaf'];
+function updateNav(){
+  const sy=window.scrollY+50;let dark=false;
+  darkSecs.forEach(id=>{const el=document.getElementById(id);if(el){const t=el.offsetTop,h=el.offsetHeight;if(sy>=t&&sy<t+h)dark=true;}});
+  const stuck=window.scrollY>60;
+  const nav=document.getElementById('nav');
+  nav.className=(dark?'dark-nav':'light-nav')+(stuck&&dark?' stuck':'');
+  document.getElementById('nAco').className=dark?'aco-d':'aco-l';
+  document.getElementById('nLa').className=dark?'la-d':'la-l';
+}
+window.addEventListener('scroll',updateNav);updateNav();
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.07});
+document.querySelectorAll('.reveal,.revl,.revr').forEach(el=>obs.observe(el));
+
+document.getElementById('waitlistBtn').addEventListener('click',()=>{
+  const v=document.getElementById('emailInput').value;
+  if(v&&v.includes('@')){
+    document.getElementById('emailInput').value='';
+    const n=document.getElementById('wnote');
+    n.textContent='✓ Você está na lista! Entraremos em contato em breve.';
+    n.style.color='#69FF93';n.style.fontSize='14px';
+  }
+});
+function toggleFaq(el){
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq').forEach(f=>f.classList.remove('open'));
+  if(!wasOpen)el.classList.add('open');
+}
+</script>
+</body>
+</html>
