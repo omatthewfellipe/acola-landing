@@ -97,7 +97,7 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .notif-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
 @keyframes pf{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-10px);}}
-.ph-frame{background:#0D0D0D;border-radius:42px;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.8),0 0 50px rgba(196,82,5,.06);}
+.ph-frame{background:#0D0D0D;border-radius:42px;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.8),0 0 50px rgba(86,175,115,.06);}
 .ph-screen{border-radius:34px;overflow:hidden;}
 
 @media(max-width:900px){
@@ -174,16 +174,16 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .como-h{font-size:clamp(28px,3.5vw,48px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;color:var(--ink);margin-bottom:14px;}
 .como-sub{font-size:16px;color:var(--label);line-height:1.7;}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1080px;margin:0 auto;position:relative;}
-.steps::before{content:'';position:absolute;top:52px;left:calc(16.67% + 16px);right:calc(16.67% + 16px);height:1.5px;background:linear-gradient(90deg,var(--slate),var(--mint));z-index:0;}
+.steps::before{content:'';position:absolute;top:52px;left:calc(16.67% + 16px);right:calc(16.67% + 16px);height:1.5px;background:var(--slate);opacity:.35;z-index:0;}
 .step{text-align:center;padding:0 24px;position:relative;z-index:1;}
 .snum{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin:0 auto 24px;position:relative;}
 .sn1{background:linear-gradient(135deg,#000,#2B1507);color:var(--mint);}
 .sn2{background:linear-gradient(135deg,#2B1507,#56AF73);color:#fff;}
-.sn3{background:linear-gradient(135deg,#56AF73,#C45205);color:#2B1507;}
+.sn3{background:linear-gradient(135deg,#56AF73,#3D8B56);color:#fff;}
 .snum::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid;animation:sp 2s ease-in-out infinite;}
 .sn1::after{border-color:rgba(43,21,7,.3);}
 .sn2::after{border-color:rgba(86,175,115,.3);animation-delay:.4s;}
-.sn3::after{border-color:rgba(196,82,5,.3);animation-delay:.8s;}
+.sn3::after{border-color:rgba(86,175,115,.3);animation-delay:.8s;}
 @keyframes sp{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.12);opacity:.3;}}
 .step-ilu{width:72px;height:72px;margin:0 auto 18px;}
 .step-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;}
@@ -210,20 +210,20 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 
 /* ── LUMA ── */
 .luma{background:linear-gradient(160deg,#000 0%,#160B03 60%,#2B1507 100%);padding:120px 5vw;position:relative;overflow:hidden;}
-.luma-bg1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,82,5,.06) 0%,transparent 60%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;}
+.luma-bg1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(86,175,115,.07) 0%,transparent 60%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;}
 .luma-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1080px;margin:0 auto;}
 .lorb-wrap{display:flex;flex-direction:column;align-items:center;gap:24px;}
-.lorb{width:160px;height:160px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;animation:orbF 5s ease-in-out infinite;}
+.lorb{width:160px;height:160px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#3D8B56,#56AF73,#3D8B56,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;animation:orbF 5s ease-in-out infinite;}
 @keyframes orbF{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.lorb-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,82,5,.18);animation:rp 2.5s ease-in-out infinite;}
+.lorb-ring{position:absolute;border-radius:50%;border:1px solid rgba(86,175,115,.2);animation:rp 2.5s ease-in-out infinite;}
 .lorb-ring:nth-child(1){width:100%;height:100%;}
 .lorb-ring:nth-child(2){width:132%;height:132%;animation-delay:.5s;}
 .lorb-ring:nth-child(3){width:170%;height:170%;animation-delay:1s;}
 @keyframes rp{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.1;transform:scale(1.03);}}
 .lorb-inner{width:130px;height:130px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;}
-.lL{font-size:50px;font-weight:800;background:linear-gradient(135deg,var(--mint),#3DFF7A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lL{font-size:50px;font-weight:800;background:linear-gradient(135deg,#56AF73,#8DD9A4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .lwave{display:flex;align-items:center;gap:4px;height:32px;}
-.wb{width:4px;border-radius:3px;background:var(--mint);}
+.wb{width:4px;border-radius:3px;background:var(--slate);}
 .wb1{animation:wv 1s ease-in-out infinite;}.wb2{animation:wv 1s ease-in-out infinite .1s;}
 .wb3{animation:wv 1s ease-in-out infinite .2s;}.wb4{animation:wv 1s ease-in-out infinite .3s;}
 .wb5{animation:wv 1s ease-in-out infinite .4s;}.wb6{animation:wv 1s ease-in-out infinite .5s;}
@@ -231,13 +231,13 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .wb9{animation:wv 1s ease-in-out infinite .22s;}
 @keyframes wv{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
 .luma-l{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.06em;}
-.ltag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:14px;}
+.ltag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:14px;}
 .lh{font-size:clamp(28px,3.5vw,50px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;color:#fff;margin-bottom:14px;}
-.lh .m{color:var(--mint);}
+.lh .m{color:var(--slate);}
 .ls{font-size:16px;color:rgba(255,255,255,.36);line-height:1.75;margin-bottom:32px;max-width:440px;}
 .lscens{display:flex;flex-direction:column;gap:8px;}
 .lsc{background:rgba(255,255,255,.03);border:.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .2s;}
-.lsc:hover{background:rgba(196,82,5,.04);border-color:rgba(196,82,5,.14);transform:translateX(4px);}
+.lsc:hover{background:rgba(86,175,115,.06);border-color:rgba(86,175,115,.2);transform:translateX(4px);}
 .lsc.sos{border-color:rgba(196,82,5,.18);}
 .lsc.sos:hover{background:rgba(196,82,5,.04);}
 .lsc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;}
@@ -889,12 +889,12 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
     <div class="fv-card dk reveal" style="transition-delay:.35s;">
       <div class="fv-tag" style="color:rgba(196,82,5,.5);">🎙️ Luma IA</div>
       <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-        <div style="width:52px;height:52px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;"><div style="width:42px;height:42px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#C45205;font-family:Manrope;">L</div></div>
+        <div style="width:52px;height:52px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#3D8B56,#56AF73,#3D8B56,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;"><div style="width:42px;height:42px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#56AF73;font-family:Manrope;">L</div></div>
         <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
-          <div style="background:rgba(196,82,5,.08);border:.5px solid rgba(196,82,5,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(86,175,115,.1);border:.5px solid rgba(86,175,115,.18);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
-          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
         </div>
       </div>
       <div class="fv-title" style="color:#fff;">Luma — Assistente de voz IA</div>
@@ -903,18 +903,18 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
     <!-- LUMA PREVIEW -->
     <div class="fv-card dk reveal" style="transition-delay:.45s;grid-column:span 1;">
-      <div class="fv-tag" style="color:rgba(196,82,5,.5);">🎙️ Luma IA</div>
+      <div class="fv-tag" style="color:rgba(86,175,115,.7);">🎙️ Luma IA</div>
       <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
         <!-- Orb Luma pequeno -->
-        <div style="width:56px;height:56px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;">
-          <div style="width:44px;height:44px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#C45205;font-family:Manrope;">L</div>
+        <div style="width:56px;height:56px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#3D8B56,#56AF73,#3D8B56,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#56AF73;font-family:Manrope;">L</div>
         </div>
         <!-- Conversa de voz -->
         <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
-          <div style="background:rgba(196,82,5,.08);border:.5px solid rgba(196,82,5,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(86,175,115,.1);border:.5px solid rgba(86,175,115,.18);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
-          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#56AF73;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
         </div>
       </div>
       <div class="fv-title" style="color:#fff;">Luma — Assistente de voz</div>
@@ -935,7 +935,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
           <div style="flex:1;background:var(--slate);border-radius:3px;height:100%;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:40%;"></div>
           <div style="flex:1;background:var(--slate);border-radius:3px;height:95%;"></div>
-          <div style="flex:1;background:#C45205;border-radius:3px;height:70%;opacity:.7;"></div>
+          <div style="flex:1;background:#56AF73;border-radius:3px;height:70%;opacity:.9;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
         </div>
@@ -1007,7 +1007,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
           <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
             <!-- Botão Luma -->
             <div style="background:#fff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:13px;border:2px solid #2B1507;box-shadow:0 2px 12px rgba(0,0,0,.07);">
-              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#2B1507,#56AF73);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;"><span style="font-size:16px;font-weight:800;color:#C45205;font-family:Manrope;">L</span><div style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#C45205;border:2px solid #fff;animation:blink 2s infinite;"></div></div>
+              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#2B1507,#56AF73);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;"><span style="font-size:16px;font-weight:800;color:#fff;font-family:Manrope;">L</span><div style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#56AF73;border:2px solid #fff;animation:blink 2s infinite;"></div></div>
               <div><div style="font-size:14px;font-weight:700;color:#2B1507;">Falar com Luma</div><div style="font-size:10px;color:#8E8E93;">remédios · dúvidas · ajuda</div></div>
             </div>
             <!-- Remédio -->
@@ -1015,7 +1015,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
               <div style="font-size:9px;font-weight:700;color:#56AF73;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Remédio de hoje</div>
               <div style="font-size:26px;font-weight:300;color:#000;letter-spacing:-1px;margin-bottom:2px;">14:00</div>
               <div style="font-size:13px;font-weight:600;color:#000;margin-bottom:8px;">Losartana 50mg</div>
-              <div style="background:#C45205;border-radius:10px;padding:9px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#2B1507;">Já tomei ✓</div></div>
+              <div style="background:#56AF73;border-radius:10px;padding:9px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#fff;">Já tomei ✓</div></div>
             </div>
             <!-- Emergência -->
             <div style="background:#FFF3EE;border-radius:15px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(196,82,5,.15);">
