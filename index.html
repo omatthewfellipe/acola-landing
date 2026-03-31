@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Acolá — E se ela precisar de você agora?</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0A0A0A;--forest:#013F22;--slate:#04A56A;--mint:#69FF93;
-  --bg:#F4F3EF;--bg2:#ECEAE4;--white:#FEFEFE;
-  --label:#8A8A8A;--warn:#E8652A;--border:rgba(0,0,0,0.07);
+  --ink:#2B1507;--forest:#2B1507;--slate:#56AF73;--mint:#C45205;
+  --bg:#F8EFEA;--bg2:#E8C4A0;--white:#FFFFFF;
+  --label:#8C6A52;--warn:#C45205;--border:rgba(43,21,7,0.09);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -17,14 +18,14 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);over
 
 /* CURSOR */
 .cur{position:fixed;width:10px;height:10px;background:var(--mint);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference;}
-.cur-r{position:fixed;width:34px;height:34px;border:1.5px solid rgba(1,63,34,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s;}
+.cur-r{position:fixed;width:34px;height:34px;border:1.5px solid rgba(43,21,7,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;transition:all .3s;}
 nav.light-nav{background:rgba(244,243,239,.93);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);}
 nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .nlogo{display:flex;align-items:center;gap:9px;text-decoration:none;}
-.nlogo-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#013F22,#04A56A);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--mint);}
+.nlogo-mark{display:flex;align-items:center;}
 .nlogo-text{font-size:17px;font-weight:800;letter-spacing:-.3px;}
 .aco-d{color:#fff;}.la-d{color:var(--mint);}
 .aco-l{color:var(--ink);}.la-l{color:var(--slate);}
@@ -43,21 +44,21 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .hero{min-height:100vh;background:var(--bg);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;position:relative;overflow:hidden;padding-top:64px;}
 .h-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.6;pointer-events:none;z-index:0;}
 /* glow lateral esquerdo — verde mais suave no claro */
-.h-glow1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(1,63,34,.08) 0%,transparent 60%);top:30%;left:-100px;pointer-events:none;animation:gp 6s ease-in-out infinite;z-index:0;}
-.h-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(4,165,106,.06) 0%,transparent 65%);top:60%;left:10%;pointer-events:none;animation:gp 6s ease-in-out infinite .8s;z-index:0;}
+.h-glow1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(43,21,7,.08) 0%,transparent 60%);top:30%;left:-100px;pointer-events:none;animation:gp 6s ease-in-out infinite;z-index:0;}
+.h-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(86,175,115,.06) 0%,transparent 65%);top:60%;left:10%;pointer-events:none;animation:gp 6s ease-in-out infinite .8s;z-index:0;}
 /* linhas diagonais decorativas */
 .h-lines{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 @keyframes gp{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.1);opacity:.55;}}
 
 /* LADO ESQUERDO — copy */
 .h-left{padding:80px 5vw 80px 6vw;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
-.h-ey{display:inline-flex;align-items:center;gap:7px;background:rgba(1,63,34,.07);border:.5px solid rgba(1,63,34,.18);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--forest);margin-bottom:32px;width:fit-content;opacity:0;animation:fu .7s ease .1s forwards;}
+.h-ey{display:inline-flex;align-items:center;gap:7px;background:rgba(43,21,7,.07);border:.5px solid rgba(43,21,7,.18);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--forest);margin-bottom:32px;width:fit-content;opacity:0;animation:fu .7s ease .1s forwards;}
 .h-dot{width:6px;height:6px;border-radius:50%;background:var(--slate);animation:blink 1.5s ease-in-out infinite;}
 .h-h1{font-size:clamp(40px,4.5vw,68px);font-weight:900;line-height:1.04;letter-spacing:-2.5px;color:var(--ink);margin-bottom:26px;opacity:0;animation:fu .7s ease .2s forwards;}
 .h-h1 .line-accent{display:block;background:linear-gradient(90deg,var(--forest) 0%,var(--slate) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .h-h1 .line-dim{display:block;color:rgba(0,0,0,.45);}
 /* contador de ansiedade */
-.h-counter{background:rgba(232,101,42,.06);border:.5px solid rgba(232,101,42,.2);border-radius:14px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu .7s ease .28s forwards;}
+.h-counter{background:rgba(196,82,5,.06);border:.5px solid rgba(196,82,5,.2);border-radius:14px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu .7s ease .28s forwards;}
 .hc-icon{width:38px;height:38px;border-radius:10px;background:var(--warn);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .hc-text{font-size:13px;color:rgba(0,0,0,.5);line-height:1.55;}
 .hc-text b{color:rgba(0,0,0,.8);font-weight:600;}
@@ -66,7 +67,7 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .h-sub b{color:var(--ink);font-weight:600;}
 .h-acts{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fu .7s ease .42s forwards;}
 .btn-p{background:var(--forest);color:#fff;font-size:14px;font-weight:800;padding:15px 34px;border-radius:13px;text-decoration:none;border:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(1,63,34,.25);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(43,21,7,.25);}
 .btn-g{background:transparent;border:1.5px solid rgba(0,0,0,.12);color:rgba(0,0,0,.5);font-size:14px;font-weight:600;padding:14px 28px;border-radius:13px;text-decoration:none;transition:all .2s;}
 .btn-g:hover{border-color:rgba(0,0,0,.3);color:var(--ink);}
 /* proof */
@@ -80,23 +81,23 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 /* LADO DIREITO — visual do app */
 .h-right{position:relative;display:flex;align-items:center;justify-content:center;padding:80px 5vw 80px 2vw;z-index:2;overflow:visible;}
 /* borda divisória verde */
-.h-right::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:linear-gradient(180deg,transparent,rgba(1,63,34,.12) 30%,rgba(1,63,34,.12) 70%,transparent);}
+.h-right::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:linear-gradient(180deg,transparent,rgba(43,21,7,.12) 30%,rgba(43,21,7,.12) 70%,transparent);}
 .h-phones-scene{position:relative;width:320px;height:520px;}
 /* phone principal */
 .ph-main{position:absolute;top:0;left:50%;transform:translateX(-50%);width:240px;animation:pf 5s ease-in-out infinite;z-index:3;}
 /* phone secundário — ghost por trás */
 .ph-ghost{position:absolute;top:40px;left:0;width:210px;opacity:.2;filter:blur(1px);transform:rotate(-8deg);z-index:1;animation:pf 5s ease-in-out infinite 1s;}
 /* notificações flutuantes — versão light */
-.h-notif1{position:absolute;right:-20px;top:80px;background:var(--white);border:.5px solid rgba(4,165,106,.2);border-radius:14px;padding:10px 14px;width:190px;z-index:5;animation:notifFloat 3s ease-in-out infinite;box-shadow:0 4px 20px rgba(0,0,0,.08);}
-.h-notif2{position:absolute;left:-30px;bottom:100px;background:var(--white);border:.5px solid rgba(232,101,42,.2);border-radius:14px;padding:10px 14px;width:170px;z-index:5;animation:notifFloat 3s ease-in-out infinite .8s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
-.h-notif3{position:absolute;right:-10px;bottom:60px;background:var(--white);border:.5px solid rgba(4,165,106,.2);border-radius:14px;padding:10px 14px;width:160px;z-index:5;animation:notifFloat 3.5s ease-in-out infinite 1.5s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.h-notif1{position:absolute;right:-20px;top:80px;background:var(--white);border:.5px solid rgba(86,175,115,.2);border-radius:14px;padding:10px 14px;width:190px;z-index:5;animation:notifFloat 3s ease-in-out infinite;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.h-notif2{position:absolute;left:-30px;bottom:100px;background:var(--white);border:.5px solid rgba(196,82,5,.2);border-radius:14px;padding:10px 14px;width:170px;z-index:5;animation:notifFloat 3s ease-in-out infinite .8s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.h-notif3{position:absolute;right:-10px;bottom:60px;background:var(--white);border:.5px solid rgba(86,175,115,.2);border-radius:14px;padding:10px 14px;width:160px;z-index:5;animation:notifFloat 3.5s ease-in-out infinite 1.5s;box-shadow:0 4px 20px rgba(0,0,0,.08);}
 @keyframes notifFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 .notif-title{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:3px;}
 .notif-sub{font-size:10px;color:var(--label);}
 .notif-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
 @keyframes pf{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-10px);}}
-.ph-frame{background:#0D0D0D;border-radius:42px;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.8),0 0 50px rgba(105,255,147,.06);}
+.ph-frame{background:#0D0D0D;border-radius:42px;padding:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.8),0 0 50px rgba(196,82,5,.06);}
 .ph-screen{border-radius:34px;overflow:hidden;}
 
 @media(max-width:900px){
@@ -135,16 +136,16 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .msg{margin-bottom:9px;}
 .msg.out{display:flex;justify-content:flex-end;}
 .bo{background:var(--bg2);color:rgba(0,0,0,.6);font-size:13px;line-height:1.5;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:78%;}
-.bi{background:linear-gradient(135deg,#013F22,#04A56A);color:#fff;font-size:13px;line-height:1.5;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:78%;}
+.bi{background:linear-gradient(135deg,#2B1507,#56AF73);color:#fff;font-size:13px;line-height:1.5;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:78%;}
 .mt2{font-size:10px;color:rgba(0,0,0,.2);margin-top:3px;text-align:right;}
 .typing{display:inline-flex;gap:4px;padding:10px 14px;background:var(--bg2);border-radius:99px;}
 .tdot{width:5px;height:5px;border-radius:50%;background:var(--label);animation:td 1.2s ease-in-out infinite;}
 .tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
 @keyframes td{0%,80%,100%{transform:scale(.7);opacity:.3;}40%{transform:scale(1);opacity:1;}}
 .unread-bar{background:var(--warn);color:#fff;font-size:12px;font-weight:700;padding:10px 14px;border-radius:11px;margin-top:12px;display:flex;align-items:center;gap:7px;}
-.acola-hint{margin-top:12px;padding:13px;background:#E8FFF0;border-radius:13px;border:.5px solid rgba(4,165,106,.18);}
+.acola-hint{margin-top:12px;padding:13px;background:#FBF5EE;border-radius:13px;border:.5px solid rgba(86,175,115,.18);}
 .ah-t{font-size:12px;color:var(--forest);font-weight:700;margin-bottom:4px;}
-.ah-l{font-size:11px;color:rgba(1,63,34,.65);line-height:1.8;}
+.ah-l{font-size:11px;color:rgba(43,21,7,.65);line-height:1.8;}
 
 /* ── ILUSTRAÇÃO FAMÍLIA ── */
 .familia-ilu{background:var(--white);padding:90px 5vw;overflow:hidden;}
@@ -176,13 +177,13 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .steps::before{content:'';position:absolute;top:52px;left:calc(16.67% + 16px);right:calc(16.67% + 16px);height:1.5px;background:linear-gradient(90deg,var(--slate),var(--mint));z-index:0;}
 .step{text-align:center;padding:0 24px;position:relative;z-index:1;}
 .snum{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin:0 auto 24px;position:relative;}
-.sn1{background:linear-gradient(135deg,#000,#013F22);color:var(--mint);}
-.sn2{background:linear-gradient(135deg,#013F22,#04A56A);color:#fff;}
-.sn3{background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;}
+.sn1{background:linear-gradient(135deg,#000,#2B1507);color:var(--mint);}
+.sn2{background:linear-gradient(135deg,#2B1507,#56AF73);color:#fff;}
+.sn3{background:linear-gradient(135deg,#56AF73,#C45205);color:#2B1507;}
 .snum::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid;animation:sp 2s ease-in-out infinite;}
-.sn1::after{border-color:rgba(1,63,34,.3);}
-.sn2::after{border-color:rgba(4,165,106,.3);animation-delay:.4s;}
-.sn3::after{border-color:rgba(105,255,147,.3);animation-delay:.8s;}
+.sn1::after{border-color:rgba(43,21,7,.3);}
+.sn2::after{border-color:rgba(86,175,115,.3);animation-delay:.4s;}
+.sn3::after{border-color:rgba(196,82,5,.3);animation-delay:.8s;}
 @keyframes sp{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.12);opacity:.3;}}
 .step-ilu{width:72px;height:72px;margin:0 auto 18px;}
 .step-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;}
@@ -193,7 +194,7 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .fv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto;}
 .fv-card{border-radius:22px;padding:28px;border:.5px solid var(--border);transition:all .3s;overflow:hidden;position:relative;}
 .fv-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.09);}
-.fv-card.dk{background:linear-gradient(160deg,#000 0%,#013F22 100%);border:none;}
+.fv-card.dk{background:linear-gradient(160deg,#000 0%,#2B1507 100%);border:none;}
 .fv-card.lt{background:var(--white);}
 .fv-card.off{background:var(--bg);}
 .fv-ilu{width:100%;height:160px;margin-bottom:20px;border-radius:14px;overflow:hidden;position:relative;}
@@ -208,13 +209,13 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .mb{font-size:8px;font-weight:700;padding:2px 6px;border-radius:99px;margin-left:auto;flex-shrink:0;}
 
 /* ── LUMA ── */
-.luma{background:linear-gradient(160deg,#000 0%,#012A16 60%,#013F22 100%);padding:120px 5vw;position:relative;overflow:hidden;}
-.luma-bg1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(105,255,147,.06) 0%,transparent 60%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;}
+.luma{background:linear-gradient(160deg,#000 0%,#160B03 60%,#2B1507 100%);padding:120px 5vw;position:relative;overflow:hidden;}
+.luma-bg1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,82,5,.06) 0%,transparent 60%);top:50%;right:-150px;transform:translateY(-50%);pointer-events:none;}
 .luma-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1080px;margin:0 auto;}
 .lorb-wrap{display:flex;flex-direction:column;align-items:center;gap:24px;}
-.lorb{width:160px;height:160px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;animation:orbF 5s ease-in-out infinite;}
+.lorb{width:160px;height:160px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;animation:orbF 5s ease-in-out infinite;}
 @keyframes orbF{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.lorb-ring{position:absolute;border-radius:50%;border:1px solid rgba(105,255,147,.18);animation:rp 2.5s ease-in-out infinite;}
+.lorb-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,82,5,.18);animation:rp 2.5s ease-in-out infinite;}
 .lorb-ring:nth-child(1){width:100%;height:100%;}
 .lorb-ring:nth-child(2){width:132%;height:132%;animation-delay:.5s;}
 .lorb-ring:nth-child(3){width:170%;height:170%;animation-delay:1s;}
@@ -236,9 +237,9 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .ls{font-size:16px;color:rgba(255,255,255,.36);line-height:1.75;margin-bottom:32px;max-width:440px;}
 .lscens{display:flex;flex-direction:column;gap:8px;}
 .lsc{background:rgba(255,255,255,.03);border:.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .2s;}
-.lsc:hover{background:rgba(105,255,147,.04);border-color:rgba(105,255,147,.14);transform:translateX(4px);}
-.lsc.sos{border-color:rgba(232,101,42,.18);}
-.lsc.sos:hover{background:rgba(232,101,42,.04);}
+.lsc:hover{background:rgba(196,82,5,.04);border-color:rgba(196,82,5,.14);transform:translateX(4px);}
+.lsc.sos{border-color:rgba(196,82,5,.18);}
+.lsc.sos:hover{background:rgba(196,82,5,.04);}
 .lsc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;}
 .lsc-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;}
 .lsc-d{font-size:11px;color:rgba(255,255,255,.3);line-height:1.55;}
@@ -280,10 +281,10 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .plan{border-radius:24px;padding:36px;position:relative;overflow:hidden;transition:all .2s;}
 .plan:hover{transform:translateY(-3px);}
 .plan-free{background:var(--white);border:1.5px solid var(--border);}
-.plan-pro{background:linear-gradient(160deg,#000 0%,#013F22 100%);border:none;}
+.plan-pro{background:linear-gradient(160deg,#000 0%,#2B1507 100%);border:none;}
 .pb{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 12px;font-size:10px;font-weight:700;margin-bottom:22px;}
 .pb-f{background:var(--bg2);color:rgba(0,0,0,.4);}
-.pb-p{background:rgba(105,255,147,.12);border:.5px solid rgba(105,255,147,.22);color:var(--mint);}
+.pb-p{background:rgba(196,82,5,.12);border:.5px solid rgba(196,82,5,.22);color:var(--mint);}
 .pb-dot{width:5px;height:5px;border-radius:50%;}
 .pname{font-size:14px;font-weight:700;margin-bottom:6px;}
 .pname-f{color:var(--ink);}.pname-p{color:#fff;}
@@ -300,17 +301,17 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .pfeats{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
 .pf{display:flex;align-items:center;gap:10px;}
 .pchk{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.pchk-f{background:#E8FFF0;}.pchk-p{background:rgba(105,255,147,.12);}
+.pchk-f{background:#FBF5EE;}.pchk-p{background:rgba(196,82,5,.12);}
 .px{width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .pft{font-size:13px;}
 .pft-f{color:rgba(0,0,0,.6);}.pft-p{color:rgba(255,255,255,.65);}
 .pft-off{color:rgba(0,0,0,.28);text-decoration:line-through;}
 .pcta{display:block;text-align:center;font-size:14px;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-family:'Manrope',sans-serif;border:none;cursor:pointer;transition:all .2s;width:100%;}
 .pcta-f{background:var(--bg2);color:rgba(0,0,0,.5);}.pcta-f:hover{color:var(--ink);}
-.pcta-p{background:var(--mint);color:var(--forest);}.pcta-p:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(105,255,147,.25);}
+.pcta-p{background:var(--mint);color:var(--forest);}.pcta-p:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(196,82,5,.25);}
 .pnote{font-size:11px;text-align:center;margin-top:10px;}
 .pnote-f{color:var(--label);}.pnote-p{color:rgba(255,255,255,.22);}
-.plan-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(105,255,147,.07) 0%,transparent 65%);top:-100px;right:-80px;pointer-events:none;}
+.plan-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,82,5,.07) 0%,transparent 65%);top:-100px;right:-80px;pointer-events:none;}
 .plan-line{position:absolute;top:-1px;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--mint),transparent);}
 .plan-compare{text-align:center;margin:28px auto 0;max-width:840px;font-size:13px;color:var(--label);}
 .plan-compare strong{color:var(--ink);}
@@ -324,9 +325,9 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 
 /* CTA */
 .ctaf{background:#000;padding:130px 5vw;text-align:center;position:relative;overflow:hidden;}
-.ctaf-g{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(ellipse,rgba(1,63,34,.3) 0%,transparent 60%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.ctaf-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(105,255,147,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(105,255,147,.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 20%,transparent 100%);}
-.urg{display:inline-flex;align-items:center;gap:8px;background:rgba(232,101,42,.1);border:.5px solid rgba(232,101,42,.2);border-radius:99px;padding:6px 15px;font-size:11px;font-weight:600;color:var(--warn);margin-bottom:28px;}
+.ctaf-g{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(ellipse,rgba(43,21,7,.3) 0%,transparent 60%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.ctaf-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,82,5,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(196,82,5,.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 20%,transparent 100%);}
+.urg{display:inline-flex;align-items:center;gap:8px;background:rgba(196,82,5,.1);border:.5px solid rgba(196,82,5,.2);border-radius:99px;padding:6px 15px;font-size:11px;font-weight:600;color:var(--warn);margin-bottom:28px;}
 .urg-dot{width:6px;height:6px;border-radius:50%;background:var(--warn);animation:blink 1s infinite;}
 .ctaf-h{font-size:clamp(36px,5.5vw,72px);font-weight:900;letter-spacing:-2.5px;line-height:1.04;color:#fff;margin-bottom:18px;position:relative;z-index:2;}
 .ctaf-h .m{color:var(--mint);}
@@ -335,12 +336,12 @@ nav.dark-nav.stuck{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);}
 .wform{display:flex;gap:10px;max-width:450px;margin:0 auto 14px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;}
 .winput{flex:1;min-width:210px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 18px;font-size:14px;color:#fff;font-family:'Manrope',sans-serif;outline:none;transition:border-color .2s;}
 .winput::placeholder{color:rgba(255,255,255,.2);}
-.winput:focus{border-color:rgba(105,255,147,.35);}
+.winput:focus{border-color:rgba(196,82,5,.35);}
 .wbtn{background:var(--mint);color:var(--forest);font-size:14px;font-weight:800;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s;}
-.wbtn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(105,255,147,.22);}
+.wbtn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,82,5,.22);}
 .wnote{font-size:12px;color:rgba(255,255,255,.2);position:relative;z-index:2;}
 footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
-.flogo{font-size:17px;font-weight:800;letter-spacing:-.3px;}
+.flogo{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;}
 .flogo .aco{color:#fff;}.flogo .la{color:var(--mint);}
 .flinks{display:flex;gap:22px;}
 .flinks a{font-size:12px;color:rgba(255,255,255,.22);text-decoration:none;transition:color .2s;}
@@ -409,7 +410,11 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 <!-- NAV -->
 <nav id="nav" class="light-nav">
   <a href="#" class="nlogo">
-    <div class="nlogo-mark">A</div>
+    <svg width="30" height="21" viewBox="0 0 81 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+      <path d="M36.1245 44.0459C31.7254 47.0971 27.1898 48.2179 22.1699 47.5477C19.0238 47.1277 16.1006 45.6765 13.9136 43.3928C11.3517 40.7178 8.81873 37.4775 6.42986 33.5537C-0.465767 22.2213 -2.74125 0.434968 4.24663 0.0148981C16.6138 -0.725953 29.5613 27.3901 36.1245 44.0459Z" fill="#C45205"/>
+      <path d="M37.6524 55.8613C32.1097 55.3477 26.7208 53.36 21.8393 50.007C22.462 50.4118 23.077 50.7899 23.6862 51.1412C23.7881 51.2004 23.8899 51.2577 23.9899 51.315C24.0917 51.3723 24.1917 51.4295 24.2935 51.4849C24.7971 51.7656 25.2948 52.0291 25.7868 52.2735C25.9828 52.3728 26.1789 52.4683 26.373 52.5618C26.5248 52.6344 26.6766 52.7069 26.8285 52.7757C26.9169 52.8177 27.0053 52.8578 27.0918 52.8979C27.43 53.0506 27.7644 53.1977 28.095 53.3351C28.1872 53.3752 28.2814 53.4134 28.3756 53.4516C28.8675 53.654 29.3519 53.8411 29.8246 54.013C30.0687 54.1008 30.307 54.1848 30.5434 54.265C31.0681 54.4426 31.5793 54.603 32.0751 54.7462C32.152 54.7691 32.227 54.7901 32.3019 54.8111C32.471 54.8588 32.6402 54.9066 32.8074 54.9505C32.9669 54.9925 33.1245 55.0326 33.2801 55.0727C33.3589 55.0918 33.4358 55.1109 33.5127 55.13C33.5896 55.1491 33.6664 55.1682 33.7433 55.1853C34.1988 55.2942 34.6389 55.3878 35.0579 55.4699C35.1789 55.4928 35.2981 55.5157 35.4153 55.5367C35.6267 55.5749 35.8324 55.6112 36.0322 55.6436C36.1668 55.6646 36.2975 55.6856 36.4262 55.7047C36.432 55.7047 36.4358 55.7066 36.4416 55.7066C36.5646 55.7257 36.6857 55.7429 36.8029 55.7582C36.9874 55.783 37.1681 55.8059 37.341 55.8269C37.4313 55.8365 37.5217 55.8479 37.6101 55.8556C37.6255 55.8575 37.6389 55.8594 37.6524 55.8613Z" fill="#C45205"/>
+      <path d="M74.5693 33.5537C65.0677 49.1688 52.2719 56.2164 39.9778 55.9949H39.9067C39.3282 55.9835 38.7517 55.9548 38.177 55.9109C38.1674 55.9109 38.1597 55.909 38.152 55.909C38.0406 55.8995 37.9272 55.888 37.81 55.8766C37.7581 55.8727 37.7062 55.867 37.6524 55.8613C37.6389 55.8594 37.6255 55.8575 37.6101 55.8556C37.5217 55.8479 37.4313 55.8365 37.341 55.8269C37.1681 55.8059 36.9874 55.783 36.8029 55.7582C36.6857 55.7429 36.5646 55.7257 36.4416 55.7066C36.4358 55.7066 36.432 55.7047 36.4262 55.7047C36.2975 55.6856 36.1668 55.6646 36.0322 55.6436C35.8324 55.6112 35.6267 55.5749 35.4153 55.5367C35.2981 55.5157 35.1789 55.4928 35.0579 55.4699C34.6389 55.3878 34.1988 55.2942 33.7433 55.1853C33.6664 55.1682 33.5896 55.1491 33.5127 55.13C33.4358 55.1109 33.3589 55.0918 33.2801 55.0727C33.1245 55.0326 32.9669 54.9925 32.8074 54.9505C32.6402 54.9066 32.471 54.8588 32.3019 54.8111C32.227 54.7901 32.152 54.7691 32.0751 54.7462C31.5793 54.603 31.0681 54.4426 30.5434 54.265C30.307 54.1848 30.0687 54.1008 29.8246 54.013C29.3519 53.8411 28.8675 53.654 28.3756 53.4516C28.2814 53.4134 28.1872 53.3752 28.095 53.3351C27.7644 53.1977 27.43 53.0506 27.0918 52.8979C27.0053 52.8578 26.9169 52.8177 26.8285 52.7757C26.6766 52.7069 26.5248 52.6344 26.373 52.5618C26.1789 52.4683 25.9828 52.3728 25.7868 52.2735C25.2948 52.0291 24.7971 51.7656 24.2935 51.4849C24.1917 51.4295 24.0917 51.3723 23.9899 51.315C23.8899 51.2577 23.7881 51.2004 23.6862 51.1412C23.077 50.7899 22.462 50.4118 21.8393 50.007C27.6818 50.788 32.669 49.3025 37.0451 46.4154C55.001 34.5771 62.6461 -0.83097 76.7526 0.0148981C83.7423 0.434968 81.4649 22.2213 74.5693 33.5537Z" fill="#C45205"/>
+    </svg>
     <span class="nlogo-text"><span id="nAco" class="aco-d">Aco</span><span id="nLa" class="la-d">lá</span></span>
   </a>
   <div class="nlinks">
@@ -429,9 +434,9 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
   <!-- linhas diagonais decorativas SVG -->
   <div class="h-lines">
     <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1200 800" preserveAspectRatio="none" fill="none">
-      <line x1="600" y1="0" x2="1200" y2="800" stroke="rgba(105,255,147,0.03)" stroke-width="1"/>
-      <line x1="500" y1="0" x2="1200" y2="700" stroke="rgba(105,255,147,0.02)" stroke-width="1"/>
-      <line x1="700" y1="0" x2="1200" y2="600" stroke="rgba(105,255,147,0.02)" stroke-width="1"/>
+      <line x1="600" y1="0" x2="1200" y2="800" stroke="rgba(196,82,5,0.03)" stroke-width="1"/>
+      <line x1="500" y1="0" x2="1200" y2="700" stroke="rgba(196,82,5,0.02)" stroke-width="1"/>
+      <line x1="700" y1="0" x2="1200" y2="600" stroke="rgba(196,82,5,0.02)" stroke-width="1"/>
     </svg>
   </div>
 
@@ -468,11 +473,11 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
     <div class="h-proof">
       <div class="havs">
-        <div class="hav" style="background:linear-gradient(135deg,#013F22,#04A56A);">C</div>
-        <div class="hav" style="background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;">A</div>
-        <div class="hav" style="background:linear-gradient(135deg,#000,#013F22);">R</div>
-        <div class="hav" style="background:linear-gradient(135deg,#013F22,#04A56A);">M</div>
-        <div class="hav" style="background:linear-gradient(135deg,#04A56A,#013F22);">S</div>
+        <div class="hav" style="background:linear-gradient(135deg,#2B1507,#56AF73);">C</div>
+        <div class="hav" style="background:linear-gradient(135deg,#56AF73,#C45205);color:#2B1507;">A</div>
+        <div class="hav" style="background:linear-gradient(135deg,#000,#2B1507);">R</div>
+        <div class="hav" style="background:linear-gradient(135deg,#2B1507,#56AF73);">M</div>
+        <div class="hav" style="background:linear-gradient(135deg,#56AF73,#2B1507);">S</div>
       </div>
       <span class="hproof-t"><b>+200 famílias</b> já na lista de espera</span>
     </div>
@@ -486,12 +491,12 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="ph-ghost">
         <div class="ph-frame">
           <div class="ph-screen" style="background:#F8F8F8;min-height:340px;">
-            <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);padding:12px 16px 44px;">
+            <div style="background:linear-gradient(160deg,#000 0%,#2B1507 100%);padding:12px 16px 44px;">
               <div style="font-size:9px;color:rgba(255,255,255,.32);margin-bottom:2px;">Quinta, 27 de março</div>
-              <div style="font-size:18px;font-weight:700;color:#fff;">Olá, <span style="color:#69FF93;">Tereza</span></div>
+              <div style="font-size:18px;font-weight:700;color:#fff;">Olá, <span style="color:#C45205;">Tereza</span></div>
             </div>
-            <div style="margin:-24px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#013F22,#04A56A,#69FF93);border-radius:13px;padding:12px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Carlos</div></div></div>
-            <div style="padding:10px 12px;"><div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);"><div style="font-size:8px;font-weight:700;color:#04A56A;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Remédio de hoje</div><div style="font-size:20px;font-weight:300;color:#000;letter-spacing:-1px;">14:00</div><div style="font-size:11px;font-weight:600;color:#000;margin-bottom:7px;">Losartana 50mg</div><div style="background:#69FF93;border-radius:8px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#013F22;">Já tomei ✓</div></div></div>
+            <div style="margin:-24px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#2B1507,#56AF73,#C45205);border-radius:13px;padding:12px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Carlos</div></div></div>
+            <div style="padding:10px 12px;"><div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);"><div style="font-size:8px;font-weight:700;color:#56AF73;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Remédio de hoje</div><div style="font-size:20px;font-weight:300;color:#000;letter-spacing:-1px;">14:00</div><div style="font-size:11px;font-weight:600;color:#000;margin-bottom:7px;">Losartana 50mg</div><div style="background:#C45205;border-radius:8px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#2B1507;">Já tomei ✓</div></div></div>
           </div>
         </div>
       </div>
@@ -500,15 +505,15 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="ph-main">
         <div class="ph-frame">
           <div class="ph-screen" style="background:#F8F8F8;">
-            <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);">
+            <div style="background:linear-gradient(160deg,#000 0%,#2B1507 100%);">
               <div style="display:flex;justify-content:space-between;padding:12px 16px 0;"><span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.8);">9:41</span><div style="display:flex;gap:3px;"><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div></div></div>
-              <div style="padding:8px 16px 46px;"><div style="font-size:10px;color:rgba(255,255,255,.32);margin-bottom:2px;">Bom dia, Carlos</div><div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;margin-bottom:6px;">Vovó <span style="color:#69FF93;">Tereza</span></div><div style="display:inline-flex;align-items:center;gap:4px;background:rgba(105,255,147,.1);border:.5px solid rgba(105,255,147,.2);border-radius:99px;padding:3px 9px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:rgba(255,255,255,.6);font-weight:500;">Em casa · agora</span></div></div>
+              <div style="padding:8px 16px 46px;"><div style="font-size:10px;color:rgba(255,255,255,.32);margin-bottom:2px;">Bom dia, Carlos</div><div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;margin-bottom:6px;">Vovó <span style="color:#C45205;">Tereza</span></div><div style="display:inline-flex;align-items:center;gap:4px;background:rgba(196,82,5,.1);border:.5px solid rgba(196,82,5,.2);border-radius:99px;padding:3px 9px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:rgba(255,255,255,.6);font-weight:500;">Em casa · agora</span></div></div>
             </div>
-            <div style="margin:-26px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#013F22 0%,#04A56A 55%,#69FF93 100%);border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 6px 18px rgba(1,63,34,.4);"><div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Tereza</div><div style="font-size:9px;color:rgba(255,255,255,.45);">vídeo ou voz</div></div></div></div>
-            <div style="padding:9px 12px;display:flex;flex-direction:column;gap:7px;"><div style="font-size:8px;font-weight:700;color:#8E8E93;letter-spacing:.08em;text-transform:uppercase;">Remédios hoje</div><div style="background:#fff;border-radius:11px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07);"><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #F8F8F8;"><div style="width:24px;height:24px;border-radius:6px;background:#E8FFF0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#04A56A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Losartana 50mg</div><div style="font-size:8px;color:#8E8E93;">08:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#E8FFF0;color:#006B35;">tomado</span></div><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;"><div style="width:24px;height:24px;border-radius:6px;background:#FFF3EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#E8652A" stroke-width="1.5" fill="none"/><path d="M12 7v5l3 3" stroke="#E8652A" stroke-width="1.5" stroke-linecap="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Metformina</div><div style="font-size:8px;color:#8E8E93;">14:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#FFF3EE;color:#B84000;">pendente</span></div></div>
-            <div style="background:#F8F8F8;border-radius:10px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:8px;font-weight:700;color:#04A56A;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;">Localização</div><div style="font-size:10px;font-weight:600;color:#000;">Em casa</div></div><div style="display:inline-flex;align-items:center;gap:4px;background:#E8FFF0;border-radius:99px;padding:3px 8px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:#013F22;font-weight:600;">ativa</span></div></div>
+            <div style="margin:-26px 12px 0;position:relative;z-index:2;"><div style="background:linear-gradient(135deg,#2B1507 0%,#56AF73 55%,#C45205 100%);border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 6px 18px rgba(43,21,7,.4);"><div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div><div><div style="font-size:12px;font-weight:700;color:#fff;">Ligar para Tereza</div><div style="font-size:9px;color:rgba(255,255,255,.45);">vídeo ou voz</div></div></div></div>
+            <div style="padding:9px 12px;display:flex;flex-direction:column;gap:7px;"><div style="font-size:8px;font-weight:700;color:#8E8E93;letter-spacing:.08em;text-transform:uppercase;">Remédios hoje</div><div style="background:#fff;border-radius:11px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07);"><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;border-bottom:.5px solid #F8F8F8;"><div style="width:24px;height:24px;border-radius:6px;background:#FBF5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#56AF73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Losartana 50mg</div><div style="font-size:8px;color:#8E8E93;">08:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#FBF5EE;color:#2B1507;">tomado</span></div><div style="padding:8px 11px;display:flex;align-items:center;gap:8px;"><div style="width:24px;height:24px;border-radius:6px;background:#FFF3EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C45205" stroke-width="1.5" fill="none"/><path d="M12 7v5l3 3" stroke="#C45205" stroke-width="1.5" stroke-linecap="round"/></svg></div><div style="flex:1;"><div style="font-size:10px;font-weight:500;color:#000;">Metformina</div><div style="font-size:8px;color:#8E8E93;">14:00</div></div><span style="font-size:7px;font-weight:700;padding:2px 5px;border-radius:99px;background:#FFF3EE;color:#B84000;">pendente</span></div></div>
+            <div style="background:#F8F8F8;border-radius:10px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:8px;font-weight:700;color:#56AF73;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;">Localização</div><div style="font-size:10px;font-weight:600;color:#000;">Em casa</div></div><div style="display:inline-flex;align-items:center;gap:4px;background:#FBF5EE;border-radius:99px;padding:3px 8px;"><div style="width:5px;height:5px;border-radius:50%;background:#4CD964;animation:blink 2s infinite;"></div><span style="font-size:9px;color:#2B1507;font-weight:600;">ativa</span></div></div>
             </div>
-            <div style="background:#fff;border-top:.5px solid #F0F0F0;padding:7px 11px 12px;display:flex;justify-content:space-around;"><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#013F22;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:7px;font-weight:600;color:#013F22;">início</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">saúde</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">local</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">perfil</div></div></div>
+            <div style="background:#fff;border-top:.5px solid #F0F0F0;padding:7px 11px 12px;display:flex;justify-content:space-around;"><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#2B1507;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:7px;font-weight:600;color:#2B1507;">início</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">saúde</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">local</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="width:18px;height:18px;border-radius:5px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:7px;font-weight:500;color:#8E8E93;">perfil</div></div></div>
           </div>
         </div>
       </div>
@@ -516,7 +521,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <!-- Notificação 1: remédio confirmado -->
       <div class="h-notif1">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-          <div style="width:22px;height:22px;border-radius:6px;background:#E8FFF0;display:flex;align-items:center;justify-content:center;flex-shrink:0;">💊</div>
+          <div style="width:22px;height:22px;border-radius:6px;background:#FBF5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;">💊</div>
           <div class="notif-title">Losartana tomada ✓</div>
         </div>
         <div class="notif-sub">Tereza confirmou às 08:03</div>
@@ -707,12 +712,12 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <!-- Ilustração: pessoa criando conta -->
       <div class="step-ilu">
         <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
-          <rect x="18" y="14" width="36" height="44" rx="6" fill="#013F22" opacity=".9"/>
+          <rect width="72" height="72" rx="22" fill="#FBF5EE"/>
+          <rect x="18" y="14" width="36" height="44" rx="6" fill="#2B1507" opacity=".9"/>
           <rect x="22" y="20" width="28" height="4" rx="2" fill="white" opacity=".3"/>
           <rect x="22" y="28" width="20" height="3" rx="1.5" fill="white" opacity=".2"/>
-          <ellipse cx="36" cy="42" rx="9" ry="9" fill="#69FF93"/>
-          <path d="M31 42l4 4 7-7" stroke="#013F22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <ellipse cx="36" cy="42" rx="9" ry="9" fill="#C45205"/>
+          <path d="M31 42l4 4 7-7" stroke="#2B1507" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="step-title">Crie seu perfil</div>
@@ -723,16 +728,16 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <!-- Ilustração: família conectada -->
       <div class="step-ilu">
         <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
-          <circle cx="22" cy="30" r="10" fill="#013F22" opacity=".8"/>
-          <circle cx="50" cy="30" r="10" fill="#04A56A" opacity=".8"/>
-          <circle cx="36" cy="22" r="10" fill="#69FF93" opacity=".9"/>
+          <rect width="72" height="72" rx="22" fill="#FBF5EE"/>
+          <circle cx="22" cy="30" r="10" fill="#2B1507" opacity=".8"/>
+          <circle cx="50" cy="30" r="10" fill="#56AF73" opacity=".8"/>
+          <circle cx="36" cy="22" r="10" fill="#C45205" opacity=".9"/>
           <path d="M22 30 L36 22 L50 30" stroke="white" stroke-width="2" stroke-dasharray="3 2" opacity=".6"/>
           <ellipse cx="22" cy="29" rx="4" ry="4.5" fill="white" opacity=".4"/>
           <ellipse cx="50" cy="29" rx="4" ry="4.5" fill="white" opacity=".4"/>
-          <ellipse cx="36" cy="21" rx="4" ry="4.5" fill="#013F22" opacity=".6"/>
-          <circle cx="36" cy="50" r="10" fill="#013F22" opacity=".15"/>
-          <text x="36" y="54" text-anchor="middle" font-size="10" fill="#013F22" font-weight="700" font-family="Manrope">família</text>
+          <ellipse cx="36" cy="21" rx="4" ry="4.5" fill="#2B1507" opacity=".6"/>
+          <circle cx="36" cy="50" r="10" fill="#2B1507" opacity=".15"/>
+          <text x="36" y="54" text-anchor="middle" font-size="10" fill="#2B1507" font-weight="700" font-family="Manrope">família</text>
         </svg>
       </div>
       <div class="step-title">Convide a família</div>
@@ -743,10 +748,10 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <!-- Ilustração: paz de espírito -->
       <div class="step-ilu">
         <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="72" height="72" rx="22" fill="#E8FFF0"/>
-          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" fill="#69FF93" opacity=".7"/>
-          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" stroke="#013F22" stroke-width="1.5" fill="none"/>
-          <path d="M29 36l5 5 10-10" stroke="#013F22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect width="72" height="72" rx="22" fill="#FBF5EE"/>
+          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" fill="#C45205" opacity=".7"/>
+          <path d="M36 16 L42 28 L56 30 L46 40 L48 54 L36 48 L24 54 L26 40 L16 30 L30 28 Z" stroke="#2B1507" stroke-width="1.5" fill="none"/>
+          <path d="M29 36l5 5 10-10" stroke="#2B1507" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="step-title">Fique tranquilo</div>
@@ -766,32 +771,32 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
     <!-- REMÉDIOS -->
     <div class="fv-card dk reveal" style="transition-delay:.05s;">
-      <div class="fv-tag" style="color:rgba(105,255,147,.5);">💊 Saúde</div>
+      <div class="fv-tag" style="color:rgba(196,82,5,.5);">💊 Saúde</div>
       <!-- Ilustração: calendário de remédios animado -->
       <div class="fv-ilu" style="background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;">
         <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
           <!-- Linha do tempo -->
-          <line x1="20" y1="70" x2="280" y2="70" stroke="rgba(105,255,147,.15)" stroke-width="2"/>
+          <line x1="20" y1="70" x2="280" y2="70" stroke="rgba(196,82,5,.15)" stroke-width="2"/>
           <!-- Horários -->
           <g>
-            <circle cx="60" cy="70" r="18" fill="rgba(4,165,106,.3)" stroke="#04A56A" stroke-width="1.5"/>
-            <text x="60" y="66" text-anchor="middle" font-size="9" fill="#69FF93" font-family="Manrope" font-weight="700">08h</text>
-            <path d="M54 73 l5 5 8-8" stroke="#69FF93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="60" y="100" text-anchor="middle" font-size="9" fill="rgba(105,255,147,.5)" font-family="Manrope">tomado</text>
+            <circle cx="60" cy="70" r="18" fill="rgba(86,175,115,.3)" stroke="#56AF73" stroke-width="1.5"/>
+            <text x="60" y="66" text-anchor="middle" font-size="9" fill="#C45205" font-family="Manrope" font-weight="700">08h</text>
+            <path d="M54 73 l5 5 8-8" stroke="#C45205" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="60" y="100" text-anchor="middle" font-size="9" fill="rgba(196,82,5,.5)" font-family="Manrope">tomado</text>
           </g>
           <g>
-            <circle cx="120" cy="70" r="18" fill="rgba(4,165,106,.3)" stroke="#04A56A" stroke-width="1.5"/>
-            <text x="120" y="66" text-anchor="middle" font-size="9" fill="#69FF93" font-family="Manrope" font-weight="700">10h</text>
-            <path d="M114 73 l5 5 8-8" stroke="#69FF93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="120" y="100" text-anchor="middle" font-size="9" fill="rgba(105,255,147,.5)" font-family="Manrope">tomado</text>
+            <circle cx="120" cy="70" r="18" fill="rgba(86,175,115,.3)" stroke="#56AF73" stroke-width="1.5"/>
+            <text x="120" y="66" text-anchor="middle" font-size="9" fill="#C45205" font-family="Manrope" font-weight="700">10h</text>
+            <path d="M114 73 l5 5 8-8" stroke="#C45205" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="120" y="100" text-anchor="middle" font-size="9" fill="rgba(196,82,5,.5)" font-family="Manrope">tomado</text>
           </g>
           <g>
-            <circle cx="180" cy="70" r="20" fill="rgba(232,101,42,.2)" stroke="#E8652A" stroke-width="2">
+            <circle cx="180" cy="70" r="20" fill="rgba(196,82,5,.2)" stroke="#C45205" stroke-width="2">
               <animate attributeName="r" values="20;23;20" dur="2s" repeatCount="indefinite"/>
             </circle>
-            <text x="180" y="66" text-anchor="middle" font-size="9" fill="#E8652A" font-family="Manrope" font-weight="700">14h</text>
-            <text x="180" y="76" text-anchor="middle" font-size="11" fill="#E8652A">!</text>
-            <text x="180" y="100" text-anchor="middle" font-size="9" fill="#E8652A" font-family="Manrope">pendente</text>
+            <text x="180" y="66" text-anchor="middle" font-size="9" fill="#C45205" font-family="Manrope" font-weight="700">14h</text>
+            <text x="180" y="76" text-anchor="middle" font-size="11" fill="#C45205">!</text>
+            <text x="180" y="100" text-anchor="middle" font-size="9" fill="#C45205" font-family="Manrope">pendente</text>
           </g>
           <g opacity=".3">
             <circle cx="240" cy="70" r="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
@@ -799,7 +804,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
             <text x="240" y="100" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="Manrope">próximo</text>
           </g>
           <!-- Notificação push -->
-          <rect x="170" y="10" width="110" height="36" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(105,255,147,.2)" stroke-width="1"/>
+          <rect x="170" y="10" width="110" height="36" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(196,82,5,.2)" stroke-width="1"/>
           <text x="185" y="25" font-size="8" fill="rgba(255,255,255,.6)" font-family="Manrope" font-weight="600">🔔 Lembrete: Metformina</text>
           <text x="185" y="37" font-size="7" fill="rgba(255,255,255,.35)" font-family="Manrope">Carlos foi notificado ✓</text>
         </svg>
@@ -816,31 +821,31 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
           <!-- Grade do mapa -->
           <defs>
             <pattern id="mapgrid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(4,165,106,.08)" stroke-width="1"/>
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(86,175,115,.08)" stroke-width="1"/>
             </pattern>
           </defs>
           <rect width="300" height="140" fill="url(#mapgrid)"/>
           <!-- Ruas simuladas -->
-          <rect x="0" y="60" width="300" height="8" rx="2" fill="rgba(4,165,106,.06)"/>
-          <rect x="120" y="0" width="8" height="140" rx="2" fill="rgba(4,165,106,.06)"/>
-          <rect x="0" y="100" width="300" height="6" rx="2" fill="rgba(4,165,106,.04)"/>
-          <rect x="60" y="0" width="6" height="140" rx="2" fill="rgba(4,165,106,.04)"/>
-          <rect x="200" y="0" width="6" height="140" rx="2" fill="rgba(4,165,106,.04)"/>
+          <rect x="0" y="60" width="300" height="8" rx="2" fill="rgba(86,175,115,.06)"/>
+          <rect x="120" y="0" width="8" height="140" rx="2" fill="rgba(86,175,115,.06)"/>
+          <rect x="0" y="100" width="300" height="6" rx="2" fill="rgba(86,175,115,.04)"/>
+          <rect x="60" y="0" width="6" height="140" rx="2" fill="rgba(86,175,115,.04)"/>
+          <rect x="200" y="0" width="6" height="140" rx="2" fill="rgba(86,175,115,.04)"/>
           <!-- Zona segura -->
-          <circle cx="150" cy="70" r="38" fill="rgba(4,165,106,.08)" stroke="rgba(4,165,106,.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="150" cy="70" r="38" fill="rgba(86,175,115,.08)" stroke="rgba(86,175,115,.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
           <!-- Pin da Tereza -->
-          <circle cx="150" cy="70" r="16" fill="#69FF93">
+          <circle cx="150" cy="70" r="16" fill="#C45205">
             <animate attributeName="r" values="16;20;16" dur="2s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="150" cy="70" r="11" fill="#013F22"/>
-          <text x="150" y="74" text-anchor="middle" font-size="10" fill="#69FF93" font-weight="800" font-family="Manrope">T</text>
+          <circle cx="150" cy="70" r="11" fill="#2B1507"/>
+          <text x="150" y="74" text-anchor="middle" font-size="10" fill="#C45205" font-weight="800" font-family="Manrope">T</text>
           <!-- Label -->
           <rect x="160" y="48" width="88" height="28" rx="8" fill="white" filter="url(#shadow)"/>
-          <text x="172" y="60" font-size="9" fill="#013F22" font-weight="700" font-family="Manrope">Em casa · agora</text>
+          <text x="172" y="60" font-size="9" fill="#2B1507" font-weight="700" font-family="Manrope">Em casa · agora</text>
           <circle cx="168" cy="58" r="3" fill="#4CD964"/>
           <text x="172" y="70" font-size="8" fill="#8E8E93" font-family="Manrope">Rua das Flores, 42</text>
           <!-- Zona segura label -->
-          <text x="88" y="30" font-size="8" fill="rgba(4,165,106,.6)" font-family="Manrope" font-weight="600">zona segura ✓</text>
+          <text x="88" y="30" font-size="8" fill="rgba(86,175,115,.6)" font-family="Manrope" font-weight="600">zona segura ✓</text>
         </svg>
       </div>
       <div class="fv-title">Ela está bem. Você sabe.</div>
@@ -853,26 +858,26 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="fv-ilu" style="background:var(--bg2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
         <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
           <!-- Botão SOS central -->
-          <circle cx="150" cy="70" r="42" fill="rgba(232,101,42,.12)" stroke="rgba(232,101,42,.3)" stroke-width="2">
+          <circle cx="150" cy="70" r="42" fill="rgba(196,82,5,.12)" stroke="rgba(196,82,5,.3)" stroke-width="2">
             <animate attributeName="r" values="42;50;42" dur="1.5s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="150" cy="70" r="34" fill="rgba(232,101,42,.2)" stroke="rgba(232,101,42,.5)" stroke-width="1.5"/>
-          <circle cx="150" cy="70" r="26" fill="#E8652A"/>
+          <circle cx="150" cy="70" r="34" fill="rgba(196,82,5,.2)" stroke="rgba(196,82,5,.5)" stroke-width="1.5"/>
+          <circle cx="150" cy="70" r="26" fill="#C45205"/>
           <text x="150" y="75" text-anchor="middle" font-size="13" fill="white" font-weight="900" font-family="Manrope">SOS</text>
           <!-- Ondas de alerta -->
-          <circle cx="150" cy="70" r="58" fill="none" stroke="rgba(232,101,42,.15)" stroke-width="1.5">
+          <circle cx="150" cy="70" r="58" fill="none" stroke="rgba(196,82,5,.15)" stroke-width="1.5">
             <animate attributeName="r" values="34;70;34" dur="2s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
           </circle>
           <!-- Notificações enviadas -->
           <rect x="10" y="10" width="90" height="30" rx="8" fill="white" opacity=".9"/>
-          <text x="20" y="22" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📱 Carlos notificado</text>
+          <text x="20" y="22" font-size="7" fill="#2B1507" font-weight="700" font-family="Manrope">📱 Carlos notificado</text>
           <text x="20" y="33" font-size="7" fill="#8E8E93" font-family="Manrope">há 3 segundos</text>
           <rect x="200" y="10" width="88" height="30" rx="8" fill="white" opacity=".9"/>
-          <text x="210" y="22" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📍 GPS enviado</text>
+          <text x="210" y="22" font-size="7" fill="#2B1507" font-weight="700" font-family="Manrope">📍 GPS enviado</text>
           <text x="210" y="33" font-size="7" fill="#8E8E93" font-family="Manrope">Rua das Flores, 42</text>
           <rect x="200" y="100" width="88" height="30" rx="8" fill="white" opacity=".9"/>
-          <text x="210" y="112" font-size="7" fill="#013F22" font-weight="700" font-family="Manrope">📱 Ana notificada</text>
+          <text x="210" y="112" font-size="7" fill="#2B1507" font-weight="700" font-family="Manrope">📱 Ana notificada</text>
           <text x="210" y="123" font-size="7" fill="#8E8E93" font-family="Manrope">a caminho · 8 min</text>
         </svg>
       </div>
@@ -882,14 +887,14 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
     <!-- LUMA PREVIEW no lugar do chat -->
     <div class="fv-card dk reveal" style="transition-delay:.35s;">
-      <div class="fv-tag" style="color:rgba(105,255,147,.5);">🎙️ Luma IA</div>
+      <div class="fv-tag" style="color:rgba(196,82,5,.5);">🎙️ Luma IA</div>
       <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-        <div style="width:52px;height:52px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;"><div style="width:42px;height:42px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#69FF93;font-family:Manrope;">L</div></div>
+        <div style="width:52px;height:52px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;"><div style="width:42px;height:42px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#C45205;font-family:Manrope;">L</div></div>
         <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
-          <div style="background:rgba(105,255,147,.08);border:.5px solid rgba(105,255,147,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(196,82,5,.08);border:.5px solid rgba(196,82,5,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
-          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
         </div>
       </div>
       <div class="fv-title" style="color:#fff;">Luma — Assistente de voz IA</div>
@@ -898,18 +903,18 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 
     <!-- LUMA PREVIEW -->
     <div class="fv-card dk reveal" style="transition-delay:.45s;grid-column:span 1;">
-      <div class="fv-tag" style="color:rgba(105,255,147,.5);">🎙️ Luma IA</div>
+      <div class="fv-tag" style="color:rgba(196,82,5,.5);">🎙️ Luma IA</div>
       <div class="fv-ilu" style="background:rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
         <!-- Orb Luma pequeno -->
-        <div style="width:56px;height:56px;border-radius:50%;background:conic-gradient(from 180deg,#013F22,#04A56A,#69FF93,#04A56A,#013F22);display:flex;align-items:center;justify-content:center;position:relative;">
-          <div style="width:44px;height:44px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#69FF93;font-family:Manrope;">L</div>
+        <div style="width:56px;height:56px;border-radius:50%;background:conic-gradient(from 180deg,#2B1507,#56AF73,#C45205,#56AF73,#2B1507);display:flex;align-items:center;justify-content:center;position:relative;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#C45205;font-family:Manrope;">L</div>
         </div>
         <!-- Conversa de voz -->
         <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Luma, tomei a Losartana"</div>
-          <div style="background:rgba(105,255,147,.08);border:.5px solid rgba(105,255,147,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
+          <div style="background:rgba(196,82,5,.08);border:.5px solid rgba(196,82,5,.15);border-radius:10px 10px 10px 4px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.75);margin-right:10%;">"Perfeito, Tereza! Confirmei e já avisei o Carlos. ✓"</div>
           <div style="background:rgba(255,255,255,.05);border-radius:10px 10px 4px 10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.6);margin-left:20%;">"Posso tomar com suco?"</div>
-          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#69FF93;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
+          <div style="display:flex;gap:4px;padding:8px 12px;align-items:center;"><div style="width:3px;height:8px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite;"></div><div style="width:3px;height:14px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .1s;"></div><div style="width:3px;height:20px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .2s;"></div><div style="width:3px;height:12px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .3s;"></div><div style="width:3px;height:16px;border-radius:2px;background:#C45205;animation:wv .8s ease-in-out infinite .4s;"></div><span style="font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;">Luma está respondendo...</span></div>
         </div>
       </div>
       <div class="fv-title" style="color:#fff;">Luma — Assistente de voz</div>
@@ -930,7 +935,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
           <div style="flex:1;background:var(--slate);border-radius:3px;height:100%;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:40%;"></div>
           <div style="flex:1;background:var(--slate);border-radius:3px;height:95%;"></div>
-          <div style="flex:1;background:#69FF93;border-radius:3px;height:70%;opacity:.7;"></div>
+          <div style="flex:1;background:#C45205;border-radius:3px;height:70%;opacity:.7;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
           <div style="flex:1;background:#E5E5EA;border-radius:3px;height:10%;opacity:.4;"></div>
         </div>
@@ -943,7 +948,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
           <div style="flex:1;font-size:8px;color:var(--label);opacity:.3;text-align:center;">Sex</div>
           <div style="flex:1;font-size:8px;color:var(--label);opacity:.3;text-align:center;">Sáb</div>
         </div>
-        <div style="background:#E8FFF0;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+        <div style="background:#FBF5EE;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
           <div style="font-size:16px;">❤️</div>
           <div><div style="font-size:10px;font-weight:600;color:var(--forest);">Pressão: 120/80 — normal</div><div style="font-size:9px;color:var(--label);">ontem, 18:30</div></div>
         </div>
@@ -972,9 +977,9 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <h2 class="lh">A cuidadora que<br>nunca <span class="m">vai embora</span></h2>
       <p class="ls">Fala português claro, entende saúde e faz o que nenhum app de cuidado fazia antes para idosos brasileiros.</p>
       <div class="lscens">
-        <div class="lsc"><div class="lsc-ic" style="background:rgba(105,255,147,.1);">💊</div><div><div class="lsc-t">"Luma, tomei meu remédio"</div><div class="lsc-d">Confirma no histórico e notifica a família. Sem digitar nada.</div></div></div>
-        <div class="lsc"><div class="lsc-ic" style="background:rgba(105,255,147,.1);">❓</div><div><div class="lsc-t">"Posso tomar com suco de laranja?"</div><div class="lsc-d">Responde com contexto dos remédios. Nunca dá diagnóstico médico.</div></div></div>
-        <div class="lsc sos"><div class="lsc-ic" style="background:rgba(232,101,42,.12);">🚨</div><div><div class="lsc-t" style="color:var(--warn);">"Luma, preciso de ajuda"</div><div class="lsc-d">SOS direto — família notificada + GPS em segundos.</div></div></div>
+        <div class="lsc"><div class="lsc-ic" style="background:rgba(196,82,5,.1);">💊</div><div><div class="lsc-t">"Luma, tomei meu remédio"</div><div class="lsc-d">Confirma no histórico e notifica a família. Sem digitar nada.</div></div></div>
+        <div class="lsc"><div class="lsc-ic" style="background:rgba(196,82,5,.1);">❓</div><div><div class="lsc-t">"Posso tomar com suco de laranja?"</div><div class="lsc-d">Responde com contexto dos remédios. Nunca dá diagnóstico médico.</div></div></div>
+        <div class="lsc sos"><div class="lsc-ic" style="background:rgba(196,82,5,.12);">🚨</div><div><div class="lsc-t" style="color:var(--warn);">"Luma, preciso de ajuda"</div><div class="lsc-d">SOS direto — família notificada + GPS em segundos.</div></div></div>
       </div>
     </div>
   </div>
@@ -986,40 +991,40 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
     <div class="revl" style="text-align:center;">
       <div class="idoso-phone-big">
         <div class="idoso-phone-screen">
-          <div style="background:linear-gradient(160deg,#000 0%,#013F22 100%);">
+          <div style="background:linear-gradient(160deg,#000 0%,#2B1507 100%);">
             <div style="display:flex;justify-content:space-between;padding:12px 16px 0;"><span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.8);">9:41</span><div style="display:flex;gap:3px;"><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,.3);"></div></div></div>
             <div style="padding:10px 18px 50px;">
               <div style="font-size:11px;color:rgba(255,255,255,.32);margin-bottom:3px;">Quinta, 27 de março</div>
-              <div style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-.3px;">Olá, <span style="color:#69FF93;">Tereza</span></div>
+              <div style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-.3px;">Olá, <span style="color:#C45205;">Tereza</span></div>
             </div>
           </div>
           <div style="margin:-30px 14px 0;position:relative;z-index:2;">
-            <div style="background:linear-gradient(135deg,#013F22 0%,#04A56A 55%,#69FF93 100%);border-radius:17px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 24px rgba(1,63,34,.4);">
+            <div style="background:linear-gradient(135deg,#2B1507 0%,#56AF73 55%,#C45205 100%);border-radius:17px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 24px rgba(43,21,7,.4);">
               <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.65 3.43 2 2 0 013.64 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="white" stroke-width="1.5" fill="none"/></svg></div>
               <div><div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Ligar para Carlos</div><div style="font-size:11px;color:rgba(255,255,255,.5);">seu filho</div></div>
             </div>
           </div>
           <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
             <!-- Botão Luma -->
-            <div style="background:#fff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:13px;border:2px solid #013F22;box-shadow:0 2px 12px rgba(0,0,0,.07);">
-              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#013F22,#04A56A);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;"><span style="font-size:16px;font-weight:800;color:#69FF93;font-family:Manrope;">L</span><div style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#69FF93;border:2px solid #fff;animation:blink 2s infinite;"></div></div>
-              <div><div style="font-size:14px;font-weight:700;color:#013F22;">Falar com Luma</div><div style="font-size:10px;color:#8E8E93;">remédios · dúvidas · ajuda</div></div>
+            <div style="background:#fff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:13px;border:2px solid #2B1507;box-shadow:0 2px 12px rgba(0,0,0,.07);">
+              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#2B1507,#56AF73);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;"><span style="font-size:16px;font-weight:800;color:#C45205;font-family:Manrope;">L</span><div style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#C45205;border:2px solid #fff;animation:blink 2s infinite;"></div></div>
+              <div><div style="font-size:14px;font-weight:700;color:#2B1507;">Falar com Luma</div><div style="font-size:10px;color:#8E8E93;">remédios · dúvidas · ajuda</div></div>
             </div>
             <!-- Remédio -->
             <div style="background:#F8F8F8;border-radius:15px;padding:13px 14px;">
-              <div style="font-size:9px;font-weight:700;color:#04A56A;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Remédio de hoje</div>
+              <div style="font-size:9px;font-weight:700;color:#56AF73;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Remédio de hoje</div>
               <div style="font-size:26px;font-weight:300;color:#000;letter-spacing:-1px;margin-bottom:2px;">14:00</div>
               <div style="font-size:13px;font-weight:600;color:#000;margin-bottom:8px;">Losartana 50mg</div>
-              <div style="background:#69FF93;border-radius:10px;padding:9px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#013F22;">Já tomei ✓</div></div>
+              <div style="background:#C45205;border-radius:10px;padding:9px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#2B1507;">Já tomei ✓</div></div>
             </div>
             <!-- Emergência -->
-            <div style="background:#FFF3EE;border-radius:15px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(232,101,42,.15);">
+            <div style="background:#FFF3EE;border-radius:15px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(196,82,5,.15);">
               <div><div style="font-size:12px;font-weight:700;color:#B84000;margin-bottom:2px;">Preciso de ajuda</div><div style="font-size:10px;color:#8E8E93;">ou diga "Luma, preciso de ajuda"</div></div>
-              <div style="width:36px;height:36px;border-radius:10px;background:#E8652A;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="white"/></svg></div>
+              <div style="width:36px;height:36px;border-radius:10px;background:#C45205;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="white"/></svg></div>
             </div>
           </div>
           <div style="background:#fff;border-top:.5px solid #F0F0F0;padding:8px 13px 13px;display:flex;justify-content:space-around;">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#013F22;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:8px;font-weight:600;color:#013F22;">início</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#2B1507;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white"/></svg></div><div style="font-size:8px;font-weight:600;color:#2B1507;">início</div></div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">saúde</div></div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#8E8E93" stroke-width="2" fill="none"/><circle cx="9" cy="7" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">família</div></div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:20px;height:20px;border-radius:6px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#8E8E93" stroke-width="2" fill="none"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#8E8E93" stroke-width="2" fill="none"/></svg></div><div style="font-size:8px;font-weight:500;color:#8E8E93;">perfil</div></div>
@@ -1075,7 +1080,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       </div>
       <div class="pc-stars">⭐⭐⭐⭐⭐</div>
       <div class="pc-q">"Minha mãe tem 78 anos e mora sozinha. O Acolá tirou um peso que eu carregava todos os dias — <strong>sei exatamente quando ela tomou cada remédio e que está bem.</strong>"</div>
-      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#013F22,#04A56A);">CA</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Carlos Andrade</div><div style="font-size:11px;color:var(--label);">Filho · São Paulo</div></div></div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#2B1507,#56AF73);">CA</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Carlos Andrade</div><div style="font-size:11px;color:var(--label);">Filho · São Paulo</div></div></div>
     </div>
     <div class="pc reveal" style="transition-delay:.15s;">
       <!-- Avatar filha -->
@@ -1084,7 +1089,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       </div>
       <div class="pc-stars">⭐⭐⭐⭐⭐</div>
       <div class="pc-q">"O diferencial é a Luma. Minha mãe não digita bem, mas fala com a Luma toda semana. <strong>Ela não se sente mais sozinha.</strong>"</div>
-      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#04A56A,#69FF93);color:#013F22;">AM</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Ana Menezes</div><div style="font-size:11px;color:var(--label);">Filha · Brasília</div></div></div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#56AF73,#C45205);color:#2B1507;">AM</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Ana Menezes</div><div style="font-size:11px;color:var(--label);">Filha · Brasília</div></div></div>
     </div>
     <div class="pc reveal" style="transition-delay:.25s;">
       <!-- Avatar filho 2 -->
@@ -1093,7 +1098,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       </div>
       <div class="pc-stars">⭐⭐⭐⭐⭐</div>
       <div class="pc-q">"Meu pai acionou o SOS. <strong>Em menos de 3 minutos eu estava a caminho dele com sua localização exata.</strong> Salva vidas mesmo."</div>
-      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#000,#013F22);">RP</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Roberto Pires</div><div style="font-size:11px;color:var(--label);">Filho · Curitiba</div></div></div>
+      <div class="pc-auth"><div class="pc-av" style="background:linear-gradient(135deg,#000,#2B1507);">RP</div><div><div style="font-size:12px;font-weight:600;color:var(--ink);">Roberto Pires</div><div style="font-size:11px;color:var(--label);">Filho · Curitiba</div></div></div>
     </div>
   </div>
   <div class="impacto reveal">
@@ -1119,7 +1124,7 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="pper pper-f">para sempre · 1 idoso · 1 familiar</div>
       <div class="pdiv pdiv-f"></div>
       <div class="pfeats">
-        <div class="pf"><div class="pchk pchk-f"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#04A56A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-f">Botão SOS</span></div>
+        <div class="pf"><div class="pchk pchk-f"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#56AF73" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-f">Botão SOS</span></div>
         <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Localização em tempo real</span></div>
         <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Luma IA</span></div>
         <div class="pf"><div class="px"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linecap="round"/></svg></div><span class="pft pft-off">Membros ilimitados</span></div>
@@ -1135,13 +1140,13 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
       <div class="pper pper-p">por mês · família ilimitada · cancele quando quiser</div>
       <div class="pdiv pdiv-p"></div>
       <div class="pfeats">
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Remédios ilimitados + lembretes automáticos</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Botão SOS + alerta GPS</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Localização em tempo real + zonas</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p"><strong style="color:var(--mint);">Luma IA</strong> — assistente de voz 24h</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Relatório semanal de saúde</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Membros ilimitados na família</span></div>
-        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#69FF93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Suporte prioritário 24h</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Remédios ilimitados + lembretes automáticos</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Botão SOS + alerta GPS</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Localização em tempo real + zonas</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p"><strong style="color:var(--mint);">Luma IA</strong> — assistente de voz 24h</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Relatório semanal de saúde</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Membros ilimitados na família</span></div>
+        <div class="pf"><div class="pchk pchk-p"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C45205" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="pft pft-p">Suporte prioritário 24h</span></div>
       </div>
       <a href="#ctaf" class="pcta pcta-p">Começar 7 dias grátis →</a>
       <div class="pnote pnote-p">Sem cartão nos primeiros 7 dias</div>
@@ -1173,7 +1178,14 @@ footer{background:#000;border-top:.5px solid rgba(255,255,255,.05);padding:40px 
 </section>
 
 <footer>
-  <div class="flogo"><span class="aco">Aco</span><span class="la">lá</span></div>
+  <div class="flogo">
+    <svg width="26" height="18" viewBox="0 0 81 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+      <path d="M36.1245 44.0459C31.7254 47.0971 27.1898 48.2179 22.1699 47.5477C19.0238 47.1277 16.1006 45.6765 13.9136 43.3928C11.3517 40.7178 8.81873 37.4775 6.42986 33.5537C-0.465767 22.2213 -2.74125 0.434968 4.24663 0.0148981C16.6138 -0.725953 29.5613 27.3901 36.1245 44.0459Z" fill="#C45205"/>
+      <path d="M37.6524 55.8613C32.1097 55.3477 26.7208 53.36 21.8393 50.007C22.462 50.4118 23.077 50.7899 23.6862 51.1412C23.7881 51.2004 23.8899 51.2577 23.9899 51.315C24.0917 51.3723 24.1917 51.4295 24.2935 51.4849C24.7971 51.7656 25.2948 52.0291 25.7868 52.2735C25.9828 52.3728 26.1789 52.4683 26.373 52.5618C26.5248 52.6344 26.6766 52.7069 26.8285 52.7757C26.9169 52.8177 27.0053 52.8578 27.0918 52.8979C27.43 53.0506 27.7644 53.1977 28.095 53.3351C28.1872 53.3752 28.2814 53.4134 28.3756 53.4516C28.8675 53.654 29.3519 53.8411 29.8246 54.013C30.0687 54.1008 30.307 54.1848 30.5434 54.265C31.0681 54.4426 31.5793 54.603 32.0751 54.7462C32.152 54.7691 32.227 54.7901 32.3019 54.8111C32.471 54.8588 32.6402 54.9066 32.8074 54.9505C32.9669 54.9925 33.1245 55.0326 33.2801 55.0727C33.3589 55.0918 33.4358 55.1109 33.5127 55.13C33.5896 55.1491 33.6664 55.1682 33.7433 55.1853C34.1988 55.2942 34.6389 55.3878 35.0579 55.4699C35.1789 55.4928 35.2981 55.5157 35.4153 55.5367C35.6267 55.5749 35.8324 55.6112 36.0322 55.6436C36.1668 55.6646 36.2975 55.6856 36.4262 55.7047C36.432 55.7047 36.4358 55.7066 36.4416 55.7066C36.5646 55.7257 36.6857 55.7429 36.8029 55.7582C36.9874 55.783 37.1681 55.8059 37.341 55.8269C37.4313 55.8365 37.5217 55.8479 37.6101 55.8556C37.6255 55.8575 37.6389 55.8594 37.6524 55.8613Z" fill="#C45205"/>
+      <path d="M74.5693 33.5537C65.0677 49.1688 52.2719 56.2164 39.9778 55.9949H39.9067C39.3282 55.9835 38.7517 55.9548 38.177 55.9109C38.1674 55.9109 38.1597 55.909 38.152 55.909C38.0406 55.8995 37.9272 55.888 37.81 55.8766C37.7581 55.8727 37.7062 55.867 37.6524 55.8613C37.6389 55.8594 37.6255 55.8575 37.6101 55.8556C37.5217 55.8479 37.4313 55.8365 37.341 55.8269C37.1681 55.8059 36.9874 55.783 36.8029 55.7582C36.6857 55.7429 36.5646 55.7257 36.4416 55.7066C36.4358 55.7066 36.432 55.7047 36.4262 55.7047C36.2975 55.6856 36.1668 55.6646 36.0322 55.6436C35.8324 55.6112 35.6267 55.5749 35.4153 55.5367C35.2981 55.5157 35.1789 55.4928 35.0579 55.4699C34.6389 55.3878 34.1988 55.2942 33.7433 55.1853C33.6664 55.1682 33.5896 55.1491 33.5127 55.13C33.4358 55.1109 33.3589 55.0918 33.2801 55.0727C33.1245 55.0326 32.9669 54.9925 32.8074 54.9505C32.6402 54.9066 32.471 54.8588 32.3019 54.8111C32.227 54.7901 32.152 54.7691 32.0751 54.7462C31.5793 54.603 31.0681 54.4426 30.5434 54.265C30.307 54.1848 30.0687 54.1008 29.8246 54.013C29.3519 53.8411 28.8675 53.654 28.3756 53.4516C28.2814 53.4134 28.1872 53.3752 28.095 53.3351C27.7644 53.1977 27.43 53.0506 27.0918 52.8979C27.0053 52.8578 26.9169 52.8177 26.8285 52.7757C26.6766 52.7069 26.5248 52.6344 26.373 52.5618C26.1789 52.4683 25.9828 52.3728 25.7868 52.2735C25.2948 52.0291 24.7971 51.7656 24.2935 51.4849C24.1917 51.4295 24.0917 51.3723 23.9899 51.315C23.8899 51.2577 23.7881 51.2004 23.6862 51.1412C23.077 50.7899 22.462 50.4118 21.8393 50.007C27.6818 50.788 32.669 49.3025 37.0451 46.4154C55.001 34.5771 62.6461 -0.83097 76.7526 0.0148981C83.7423 0.434968 81.4649 22.2213 74.5693 33.5537Z" fill="#C45205"/>
+    </svg>
+    <span class="aco">Aco</span><span class="la">lá</span>
+  </div>
   <div class="flinks">
     <a href="#">Privacidade</a><a href="#">Termos</a><a href="#">Contato</a><a href="#">Instagram</a><a href="#">Blog</a>
   </div>
@@ -1219,7 +1231,7 @@ document.getElementById('waitlistBtn').addEventListener('click',()=>{
     document.getElementById('emailInput').value='';
     const n=document.getElementById('wnote');
     n.textContent='✓ Você está na lista! Entraremos em contato em breve.';
-    n.style.color='#69FF93';n.style.fontSize='14px';
+    n.style.color='#C45205';n.style.fontSize='14px';
   }
 });
 function toggleFaq(el){
